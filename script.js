@@ -266,8 +266,10 @@ chips.forEach((chip) =>
   const el = document.querySelector('#terminal code');
   if (!el) return;
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const base = location.origin + location.pathname.replace(/index\.html$/, '').replace(/\/$/, '');
+  const apiUrl = location.hostname.endsWith('vercel.app') ? `${location.origin}/api/me` : `${base}/me.json`;
   const lines = [
-    ['ps', '$ '], ['cmd', 'curl -s https://brianguzman.vercel.app/api/me\n'],
+    ['ps', '$ '], ['cmd', `curl -s ${apiUrl}\n`],
     ['meta', 'HTTP/1.1 200 OK · content-type: application/json\n\n'],
     ['p', '{\n'],
     ['k', '  "nombre"'], ['p', ': '], ['s', '"Brian Guzmán Mañón"'], ['p', ',\n'],
