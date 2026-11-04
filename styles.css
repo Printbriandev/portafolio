@@ -638,3 +638,17 @@ main { position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .boot { display: none; }
 }
+
+/* --- Contacto: tarjetas de correo, teléfono y WhatsApp --- */
+.contact__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: min(720px, 100%); margin-top: 4px; }
+.contact__item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+  padding: 14px 16px; background: var(--surface); border: 1px solid var(--border-hi); color: var(--text);
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.contact__item:hover { text-decoration: none; transform: translate(-2px, -2px); border-color: var(--accent); box-shadow: 4px 4px 0 rgba(167, 139, 250, .45); }
+.contact__k { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+.contact__v { font-size: 14.5px; word-break: break-all; }
+.contact__item--wa { border-color: rgba(52, 224, 161, .55); background: linear-gradient(135deg, rgba(52, 224, 161, .12), var(--surface) 70%); }
+.contact__loc { color: var(--muted); font-size: 12.5px; margin: 18px 0 0; }
+@media (max-width: 560px) { .contact__grid { grid-template-columns: 1fr; } }
