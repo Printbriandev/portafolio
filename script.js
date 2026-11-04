@@ -275,10 +275,8 @@ chips.forEach((chip) =>
     ['k', '  "nombre"'], ['p', ': '], ['s', '"Brian Guzmán Mañón"'], ['p', ',\n'],
     ['k', '  "rol"'], ['p', ': '], ['s', '"Junior Backend Developer"'], ['p', ',\n'],
     ['k', '  "trabajo"'], ['p', ': '], ['s', '"Fraud Analyst Jr. @ MIO"'], ['p', ',\n'],
-    ['k', '  "estudios"'], ['p', ': '], ['s', '"Desarrollo de Software @ ITLA"'], ['p', ',\n'],
-    ['k', '  "stack"'], ['p', ': ['], ['s', '"C#"'], ['p', ', '], ['s', '"ASP.NET Core"'], ['p', ', '], ['s', '"Node.js"'], ['p', ', '], ['s', '"SQL"'], ['p', '],\n'],
-    ['k', '  "construye_con"'], ['p', ': ['], ['s', '"Claude"'], ['p', ', '], ['s', '"Claude Code"'], ['p', '],\n'],
-    ['k', '  "idiomas"'], ['p', ': ['], ['s', '"Español (nativo)"'], ['p', ', '], ['s', '"Inglés (intermedio)"'], ['p', '],\n'],
+    ['k', '  "ubicacion"'], ['p', ': '], ['s', '"Santo Domingo, RD"'], ['p', ',\n'],
+    ['k', '  "busca"'], ['p', ': '], ['s', '"pasantía o puesto junior en backend"'], ['p', ',\n'],
     ['k', '  "disponible"'], ['p', ': '], ['b', 'true'], ['p', '\n}\n'],
   ];
   const cls = { ps: 't-ps', cmd: 't-cmd', meta: 't-meta', k: 't-key', s: 't-str', b: 't-bool', p: '' };
