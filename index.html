@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brian Guzmán Mañón · Junior Backend Developer</title>
+  <meta name="description" content="Portafolio de Brian Guzmán Mañón, Junior Backend Developer (C#, ASP.NET Core, Node.js, SQL), Fraud Analyst Jr. en MIO y estudiante de Desarrollo de Software en el ITLA.">
+  <meta name="theme-color" content="#070b10">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Brian Guzmán Mañón · Junior Backend Developer">
+  <meta property="og:description" content="C#, ASP.NET Core, Node.js y SQL. Proyectos reales, freelance y académicos, construidos con ayuda de IA.">
+  <meta property="og:image" content="img/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__door boot__door--l"><span class="boot__handle"></span></div>
+    <div class="boot__door boot__door--r"><span class="boot__handle"></span></div>
+    <div class="boot__panel mono">
+      <p class="boot__title"><i class="led"></i> BG-DC01 · iniciando servidor</p>
+      <ul class="boot__log"></ul>
+      <button class="boot__skip mono" type="button">entrar →</button>
+    </div>
+  </div>
+
+  <header class="nav" id="top">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <span class="brand__mark mono">BG</span>
+        <span class="brand__name">brian<span class="accent">@</span>backend<span class="blink">_</span></span>
+      </a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="menu" class="nav__menu mono">
+        <a href="#sobre-mi">/sobre-mi</a>
+        <a href="#proyectos">/proyectos</a>
+        <a href="#ia">/ia</a>
+        <a href="#stack">/stack</a>
+        <a href="#experiencia">/experiencia</a>
+        <a href="#contacto" class="nav__cta">/contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="backbone" aria-hidden="true"></div>
+    <!-- HERO -->
+    <section class="hero">
+      <canvas class="hero__grid" id="grid" aria-hidden="true"></canvas>
+      <div class="wrap hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow mono"><span class="prompt">$</span> <span id="typed-whoami">whoami</span><span class="caret"></span></p>
+          <h1>Brian Guzmán<br><span class="grad">Mañón</span></h1>
+          <p class="hero__role mono">Junior Backend Developer</p>
+          <p class="hero__lead">
+            Construyo <strong>APIs y sitios web</strong> con <strong>C#, ASP.NET Core, Node.js y SQL</strong>.
+            Soy <strong>Fraud Analyst Jr. en MIO</strong>, una fintech dominicana de pagos, y estudio Desarrollo de
+            Software en el <strong>ITLA</strong>.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#proyectos"><span class="mono">GET</span> /proyectos</a>
+            <a class="btn btn--ghost" href="CV-Brian-Guzman-Manon.pdf" target="_blank" rel="noopener">Descargar CV ↓</a>
+          </div>
+          <ul class="hero__links mono">
+            <li><a href="https://github.com/Printbriandev" target="_blank" rel="noopener">github</a></li>
+            <li><a href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener">linkedin</a></li>
+            <li><a href="https://www.instagram.com/gmn.brian" target="_blank" rel="noopener">instagram</a></li>
+            <li><a href="mailto:brianagmdev@gmail.com">email</a></li>
+          </ul>
+        </div>
+
+        <figure class="node" aria-label="Foto de Brian Guzmán">
+          <div class="node__bar mono">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span>node-01 · santo-domingo</span>
+            <span class="status"><i class="led"></i>online</span>
+          </div>
+          <div class="node__frame">
+            <img src="img/brian-perfil.jpg" alt="Brian Guzmán Mañón" width="800" height="800" fetchpriority="high">
+            <span class="scan" aria-hidden="true"></span>
+            <span class="corner corner--tl"></span><span class="corner corner--tr"></span>
+            <span class="corner corner--bl"></span><span class="corner corner--br"></span>
+          </div>
+          <figcaption class="node__meta mono">
+            <span><b>uptime</b> estudiando desde 2024</span>
+            <span><b>estado</b> disponible para pasantía o puesto junior</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wrap">
+        <ul class="metrics mono" aria-label="Resumen">
+          <li><b data-count="8">0</b><span>proyectos</span></li>
+          <li><b data-count="3">0</b><span>clientes freelance</span></li>
+          <li><b data-count="1">0</b><span>en producción</span></li>
+          <li><b data-count="6">0</b><span>certificaciones</span></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <div class="switch" aria-hidden="true">
+      <div class="wrap switch__inner">
+        <span class="switch__ear"></span>
+        <div class="switch__label mono"><b>BG-SW24-CORE</b><span>24× RJ45 · 1 Gbps</span></div>
+        <div class="switch__ports" data-ports="24"></div>
+        <div class="switch__uplink mono"><span class="sfp"></span><span class="sfp"></span><em>SFP+</em></div>
+        <span class="switch__ear"></span>
+      </div>
+    </div>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="section reveal">
+      <div class="wrap">
+        <header class="endpoint"><span class="method">GET</span><h2>/sobre-mi</h2><span class="code">200 OK</span></header>
+        <div class="about">
+          <figure class="about__photo">
+            <img src="img/brian-graduacion.jpg" alt="Brian Guzmán Mañón en su foto de graduación" width="800" height="1000" loading="lazy">
+            <figcaption class="mono">// listo para el siguiente nivel</figcaption>
+          </figure>
+          <div class="about__body">
+            <div class="prose">
+              <p>
+                Me gusta el backend: diseñar APIs, modelar datos y que todo funcione de forma segura detrás de la
+                pantalla. En MIO monitoreo transacciones e investigo casos sospechosos. Eso me enseñó a pensar en
+                cómo se rompe un sistema y cómo protegerlo.
+              </p>
+              <p>
+                Tengo un proyecto en producción para un cliente real y proyectos académicos con arquitectura en
+                capas, Git Flow y pruebas. Busco mi primera oportunidad formal como desarrollador para seguir
+                creciendo.
+              </p>
+            </div>
+            <div class="terminal" aria-label="Respuesta JSON de ejemplo con mis datos">
+              <div class="terminal__bar mono"><span class="dots"><i></i><i></i><i></i></span><span>bash — api/me</span></div>
+              <pre class="terminal__body mono" id="terminal"><code></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="section reveal">
+      <div class="wrap">
+        <header class="endpoint"><span class="method">GET</span><h2>/proyectos</h2><span class="code">200 OK</span></header>
+
+        <div class="filters mono" role="group" aria-label="Filtrar proyectos">
+          <button class="chip is-active" data-filter="all">?tipo=todos</button>
+          <button class="chip" data-filter="freelance">?tipo=freelance</button>
+          <button class="chip" data-filter="academico">?tipo=academico</button>
+        </div>
+
+        <div class="grid">
+          <article class="card card--featured" data-type="freelance">
+            <div class="card__top mono">
+              <span class="badge badge--live"><i class="led"></i>en producción</span>
+              <span class="card__date">jun 2026</span>
+            </div>
+            <h3>MTS Tattoo Studio</h3>
+            <p class="card__kind mono">sitio web + API · freelance</p>
+            <p>
+              Sitio para un estudio de tatuajes con galería por estilos, reservas de citas y opiniones moderadas.
+              API en Node.js y Express con validación, rate limiting y Helmet/CSP; datos en Supabase (PostgreSQL con
+              RLS) y avisos al estudio por WhatsApp y correo.
+            </p>
+            <div class="flow mono" aria-hidden="true">
+              <span>cliente</span><i></i><span>express</span><i></i><span>supabase</span><i></i><span>whatsapp</span>
+            </div>
+            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>Supabase</li><li>Vercel</li><li>GitHub Actions</li></ul>
+            <div class="card__links mono"><a href="https://mts-tattoo-studio-frontend.vercel.app" target="_blank" rel="noopener">ver sitio ↗</a></div>
+          </article>
+
+          <article class="card" data-type="freelance">
+            <div class="card__top mono"><span class="badge badge--wip">prototipo</span><span class="card__date">oct 2026</span></div>
+            <h3>J.A.S Smokehouse &amp; Grill</h3>
+            <p class="card__kind mono">sitio web · freelance</p>
+            <p>Menú digital por código QR con carrito y envío del pedido por WhatsApp.</p>
+            <ul class="tags mono"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Vercel</li></ul>
+            <div class="card__links mono"><a href="https://jas-smokehouse-web.vercel.app" target="_blank" rel="noopener">ver prototipo ↗</a></div>
+          </article>
+
+          <article class="card" data-type="freelance">
+            <div class="card__top mono"><span class="badge badge--wip">en desarrollo</span><span class="card__date">sep 2026</span></div>
+            <h3>Sitio para una inmobiliaria</h3>
+            <p class="card__kind mono">sitio web · freelance · santo domingo este</p>
+            <p>Requerimientos, mapa del sitio, propuesta visual y propuesta económica entregados. La construcción avanza según el contenido de la clienta.</p>
+            <ul class="tags mono"><li>Requerimientos</li><li>UX</li><li>HTML/CSS</li></ul>
+          </article>
+
+          <article class="card" data-type="academico">
+            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">jun – jul 2026</span></div>
+            <h3>Autogest-Pro</h3>
+            <p class="card__kind mono">gestión de taller mecánico · programación III</p>
+            <p>Solución .NET en capas (Api, Application, Domain, Infrastructure y Web) con EF Core, SQL Server y frontend en React. Trabajo en equipo con ramas y pull requests.</p>
+            <ul class="tags mono"><li>C#</li><li>ASP.NET Core</li><li>EF Core</li><li>SQL Server</li><li>React</li></ul>
+            <div class="card__links mono"><a href="https://github.com/Printbriandev/Autogest-Pro" target="_blank" rel="noopener">código ↗</a></div>
+          </article>
+
+          <article class="card" data-type="academico">
+            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2026</span></div>
+            <h3>Sistema de Reservas de Citas</h3>
+            <p class="card__kind mono">api rest · programación III</p>
+            <p>API para agendar citas entre clientes y profesionales respetando reglas de disponibilidad. Documentación con Swagger y pruebas con pytest.</p>
+            <ul class="tags mono"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>pytest</li></ul>
+            <div class="card__links mono"><a href="https://github.com/Printbriandev/sistema-reservas-citas" target="_blank" rel="noopener">código ↗</a></div>
+          </article>
+
+          <article class="card" data-type="academico">
+            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">ago 2026</span></div>
+            <h3>Chatbot del ITLA</h3>
+            <p class="card__kind mono">minería de datos</p>
+            <p>Chatbot en Python con 14 temas y 100 variantes de preguntas. Tolera errores de tipeo, no usa librerías externas y separa los datos de la lógica.</p>
+            <ul class="tags mono"><li>Python</li><li>NLP básico</li></ul>
+            <div class="card__links mono"><a href="https://github.com/Printbriandev/chatbot-itla" target="_blank" rel="noopener">código ↗</a></div>
+          </article>
+
+          <article class="card" data-type="academico">
+            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2026</span></div>
+            <h3>CRUD de Usuarios</h3>
+            <p class="card__kind mono">api rest · git flow</p>
+            <p>API en Node.js y Express con frontend en JavaScript, desarrollada con ramas develop, qa y main.</p>
+            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>Git Flow</li></ul>
+            <div class="card__links mono"><a href="https://github.com/Printbriandev/crud-usuarios-github" target="_blank" rel="noopener">código ↗</a></div>
+          </article>
+
+          <article class="card" data-type="academico">
+            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2025</span></div>
+            <h3>Inventario de artículos</h3>
+            <p class="card__kind mono">full stack · primer proyecto con node.js</p>
+            <p>CRUD de inventario con búsqueda y validación de códigos repetidos. Conexión configurada por variables de entorno.</p>
+            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>MySQL</li><li>React</li></ul>
+            <div class="card__links mono"><a href="https://github.com/Printbriandev/Project-final-with-nodejs-" target="_blank" rel="noopener">código ↗</a></div>
+          </article>
+        </div>
+
+        <p class="note mono">// ¿ves algo que mejorar? acepto sugerencias: <a href="mailto:brianagmdev@gmail.com">brianagmdev@gmail.com</a></p>
+      </div>
+    </section>
+
+    <!-- IA -->
+    <section id="ia" class="section reveal">
+      <div class="wrap">
+        <header class="endpoint"><span class="method method--post">POST</span><h2>/construir-con-ia</h2><span class="code">201 Created</span></header>
+        <p class="lead">
+          Trabajo a diario con <strong>Claude</strong> y <strong>Claude Code</strong> como compañeros de desarrollo.
+          La IA me ayuda a aprender y a avanzar más rápido, pero las decisiones y la revisión del código son mías:
+          entiendo cada línea antes de subirla.
+        </p>
+
+        <ol class="pipeline">
+          <li class="step">
+            <span class="step__n mono">01</span>
+            <h3>Planificar</h3>
+            <p>Divido cada trabajo en partes con objetivo y verificación, y no avanzo hasta cerrar la anterior.</p>
+          </li>
+          <li class="step">
+            <span class="step__n mono">02</span>
+            <h3>Construir y depurar</h3>
+            <p>Uso Claude Code en la terminal para escribir, probar y corregir código, como en MTS Tattoo Studio y en este portafolio.</p>
+          </li>
+          <li class="step">
+            <span class="step__n mono">03</span>
+            <h3>Revisar la seguridad</h3>
+            <p>Audito mis repos para sacar credenciales del código y moverlas a variables de entorno, y reemplazo datos personales por datos de ejemplo.</p>
+          </li>
+          <li class="step">
+            <span class="step__n mono">04</span>
+            <h3>Automatizar y documentar</h3>
+            <p>Escribo READMEs claros y automatizo tareas repetitivas con scripts, desde generar documentos hasta desplegar en Vercel.</p>
+          </li>
+        </ol>
+
+        <div class="ia__tools">
+          <span class="mono label">herramientas</span>
+          <ul class="tags mono tags--lg"><li>Claude</li><li>Claude Code</li><li>Cursor</li><li>Antigravity</li><li>GitHub Actions</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section reveal">
+      <div class="wrap">
+        <header class="endpoint"><span class="method">GET</span><h2>/stack</h2><span class="code">200 OK</span></header>
+
+        <div class="arch mono" aria-label="Flujo de una petición: cliente, API, lógica y base de datos">
+          <div class="arch__node"><span class="arch__label">cliente</span><span class="arch__tech">HTML · JS · React</span></div>
+          <div class="arch__wire"><i></i><i></i></div>
+          <div class="arch__node arch__node--hot"><span class="arch__label">api rest</span><span class="arch__tech">ASP.NET Core · Express</span></div>
+          <div class="arch__wire"><i></i><i></i></div>
+          <div class="arch__node"><span class="arch__label">lógica</span><span class="arch__tech">C# · Node.js · Python</span></div>
+          <div class="arch__wire"><i></i><i></i></div>
+          <div class="arch__node"><span class="arch__label">base de datos</span><span class="arch__tech">SQL Server · PostgreSQL</span></div>
+        </div>
+
+        <div class="rack">
+          <div class="rack__unit">
+            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>backend</h3><span class="u">U1</span></div>
+            <ul class="tags mono"><li>C#</li><li>ASP.NET Core</li><li>Node.js</li><li>Express</li><li>APIs REST</li><li>Python</li><li>FastAPI</li></ul>
+          </div>
+          <div class="rack__unit">
+            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>bases de datos</h3><span class="u">U2</span></div>
+            <ul class="tags mono"><li>SQL Server</li><li>MySQL</li><li>PostgreSQL</li><li>Supabase</li><li>Elastic</li></ul>
+          </div>
+          <div class="rack__unit">
+            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>frontend</h3><span class="u">U3</span></div>
+            <ul class="tags mono"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li></ul>
+          </div>
+          <div class="rack__unit">
+            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>devops y herramientas</h3><span class="u">U4</span></div>
+            <ul class="tags mono"><li>Git y GitHub</li><li>GitHub Actions</li><li>Vercel</li><li>Docker</li><li>Visual Studio</li><li>VS Code</li></ul>
+          </div>
+          <div class="rack__unit">
+            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>fraude y seguridad</h3><span class="u">U5</span></div>
+            <ul class="tags mono"><li>Transaction Monitoring</li><li>CyberSource</li><li>Sentinel</li><li>Ciberseguridad</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section id="experiencia" class="section reveal">
+      <div class="wrap">
+        <header class="endpoint"><span class="method">GET</span><h2>/experiencia</h2><span class="code">200 OK</span></header>
+        <ol class="logs mono">
+          <li>
+            <span class="logs__ts">[2025-10 → hoy]</span><span class="logs__lvl">INFO</span>
+            <div><strong>Fraud Analyst Jr. · MIO</strong><p>Fintech dominicana de pagos. Monitoreo de transacciones, investigación de casos sospechosos y consultas SQL en Elastic.</p></div>
+          </li>
+          <li>
+            <span class="logs__ts">[2026-06 → hoy]</span><span class="logs__lvl">INFO</span>
+            <div><strong>Desarrollador web freelance</strong><p>Sitios y APIs para negocios de Santo Domingo: MTS Tattoo Studio, J.A.S Smokehouse y una inmobiliaria.</p></div>
+          </li>
+          <li>
+            <span class="logs__ts">[2024-05 → hoy]</span><span class="logs__lvl logs__lvl--edu">EDU</span>
+            <div><strong>Tecnólogo en Desarrollo de Software · ITLA</strong><p>Instituto Tecnológico de las Américas.</p></div>
+          </li>
+        </ol>
+
+        <h3 class="sub mono">// certificaciones</h3>
+        <ul class="certs">
+          <li><strong>English for IT 2</strong><span class="mono">Cisco / ITLA · ago 2026</span></li>
+          <li><strong>Enterprise Full Stack with Spring Boot 4 and Angular 21</strong><span class="mono">Dev Senior Code · mar 2026</span></li>
+          <li><strong>Apps de IA generativa</strong><span class="mono">Google Cloud / Coursera · ene 2026</span></li>
+          <li><strong>CCSC</strong><span class="mono">Hack &amp; Fix · ene 2026</span></li>
+          <li><strong>Foundations of Cybersecurity</strong><span class="mono">Google / Coursera · may 2025</span></li>
+          <li><strong>Fundamentos Técnicos del Computador</strong><span class="mono">ITLA · abr 2024</span></li>
+        </ul>
+        <p class="note mono">// próximas: Foundational C# with Microsoft · HackerRank SQL · GitHub Foundations</p>
+      </div>
+    </section>
+
+
+    <div class="switch" aria-hidden="true">
+      <div class="wrap switch__inner">
+        <span class="switch__ear"></span>
+        <div class="switch__label mono"><b>BG-SW24-EDGE</b><span>24× RJ45 · 1 Gbps</span></div>
+        <div class="switch__ports" data-ports="24"></div>
+        <div class="switch__uplink mono"><span class="sfp"></span><span class="sfp"></span><em>SFP+</em></div>
+        <span class="switch__ear"></span>
+      </div>
+    </div>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section section--contact reveal">
+      <div class="wrap contact">
+        <header class="endpoint endpoint--center"><span class="method method--post">POST</span><h2>/contacto</h2></header>
+        <p class="contact__lead">¿Tienes una pasantía, un puesto junior o un proyecto? Escríbeme.</p>
+        <a class="btn btn--primary btn--lg mono" href="mailto:brianagmdev@gmail.com">brianagmdev@gmail.com</a>
+        <ul class="contact__links mono">
+          <li><a href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener">linkedin</a></li>
+          <li><a href="https://github.com/Printbriandev" target="_blank" rel="noopener">github</a></li>
+          <li><a href="https://www.instagram.com/gmn.brian" target="_blank" rel="noopener">instagram</a></li>
+          <li><a href="CV-Brian-Guzman-Manon.pdf" target="_blank" rel="noopener">cv.pdf</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <div class="wrap footer__inner">
+      <p><i class="led"></i> todos los sistemas operativos · © <span id="year">2026</span> Brian Guzmán Mañón</p>
+      <a href="#top">volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "nombre": "Brian Guzmán Mañón",
+  "rol": "Junior Backend Developer",
+  "trabajo": "Fraud Analyst Jr. @ MIO",
+  "estudios": "Desarrollo de Software @ ITLA",
+  "stack": ["C#", "ASP.NET Core", "Node.js", "SQL"],
+  "construye_con": ["Claude", "Claude Code"],
+  "disponible": true,
+  "contacto": {
+    "email": "brianagmdev@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/brian-guzman-manon",
+    "github": "https://github.com/Printbriandev"
+  }
+}
