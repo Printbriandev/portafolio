@@ -11,6 +11,14 @@ const setMenu = (open) => {
 toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
 menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
 
+/* ---------- Volver al inicio (logo y "volver arriba") ---------- */
+document.querySelectorAll('a[href="#top"]').forEach((a) => a.addEventListener('click', (e) => {
+  e.preventDefault();
+  setMenu(false);
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+}));
+
 /* ---------- Filtro de proyectos ---------- */
 const chips = document.querySelectorAll('.chip');
 const cards = document.querySelectorAll('.card');
