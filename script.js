@@ -1,349 +1,243 @@
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* script.js · navegación, apariciones, pausa de animaciones, traza lateral, /api/me y año.
+   Cada módulo es independiente: si uno falla, los demás siguen y el contenido se ve igual. */
+(() => {
+  'use strict';
+  const RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const mod = (name, fn) => { try { fn(); } catch (e) { try { console.warn('[' + name + ']', e); } catch (_) { /* nada */ } } };
 
-/* ---------- Menú móvil ---------- */
-const toggle = document.querySelector('.nav__toggle');
-const menu = document.getElementById('menu');
-const setMenu = (open) => {
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-  menu.classList.toggle('is-open', open);
-};
-toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
-menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-
-/* ---------- Volver al inicio (logo y "volver arriba") ---------- */
-document.querySelectorAll('a[href="#top"]').forEach((a) => a.addEventListener('click', (e) => {
-  e.preventDefault();
-  setMenu(false);
-  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-  if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
-}));
-
-/* ---------- Filtro de proyectos ---------- */
-const chips = document.querySelectorAll('.chip');
-const cards = document.querySelectorAll('.card');
-chips.forEach((chip) =>
-  chip.addEventListener('click', () => {
-    chips.forEach((c) => c.classList.toggle('is-active', c === chip));
-    const f = chip.dataset.filter;
-    cards.forEach((card) => { card.hidden = f !== 'all' && card.dataset.type !== f; });
-  })
-);
-
-/* ---------- Data center en 3D del hero: pasillo de racks, piso técnico y cables ---------- */
-(function datacenter() {
-  const canvas = document.getElementById('grid');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr, f, vx, vy, raf, t0 = performance.now();
-  let mx = 0, my = 0, tx = 0, ty = 0;
-
-  const COLORS = { green: [52, 224, 161], blue: [77, 163, 255], violet: [167, 139, 250], amber: [251, 191, 90] };
-  const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
-
-  // Mundo: cámara en el origen mirando hacia +Z. Y crece hacia abajo.
-  const FLOOR = 1.15, CEIL = -1.35, AISLE = 1.0, RACK_TOP = -0.95;
-  const RACK_D = 0.78, GAP = 0.06, Z_START = 1.3, N_RACKS = 11, UNITS = 18;
-  const racks = [];
-  for (const side of [-1, 1]) {
-    for (let i = 0; i < N_RACKS; i++) {
-      const z0 = Z_START + i * (RACK_D + GAP);
-      const leds = [];
-      for (let u = 0; u < UNITS; u++) {
-        if (Math.random() < 0.12) continue; // hueco vacío en el rack
-        const n = 1 + (Math.random() * 3 | 0);
-        for (let k = 0; k < n; k++) {
-          const r = Math.random();
-          leds.push({
-            u, pos: 0.08 + k * 0.07,
-            color: r < 0.62 ? COLORS.green : r < 0.84 ? COLORS.blue : r < 0.95 ? COLORS.violet : COLORS.amber,
-            speed: 0.8 + Math.random() * 6, phase: Math.random() * 10, duty: 0.35 + Math.random() * 0.5,
-          });
-        }
-      }
-      racks.push({ side, z0, z1: z0 + RACK_D, leds });
+  /* ---------- menú, logo / "Volver arriba", sección actual y estado del header ---------- */
+  mod('nav', () => {
+    const hdr = document.querySelector('.hdr');
+    const toggle = hdr.querySelector('.hdr__toggle');
+    const menu = document.getElementById('menu');
+    const outside = [document.getElementById('main'), document.querySelector('.ftr')].filter(Boolean);
+    let open = false;
+    const onKey = (e) => { if (e.key === 'Escape') setMenu(false, true); };
+    function setMenu(v, focusBack) {
+      if (open === v) return;
+      open = v;
+      toggle.setAttribute('aria-expanded', String(v));
+      toggle.setAttribute('aria-label', v ? 'Cerrar menú' : 'Abrir menú');
+      menu.classList.toggle('is-open', v);
+      if (v) menu.scrollTop = 0;
+      hdr.classList.toggle('is-open', v);
+      outside.forEach((el) => { el.inert = v; });
+      if (v) document.addEventListener('keydown', onKey); else document.removeEventListener('keydown', onKey);
+      if (!v && focusBack) toggle.focus();
     }
-  }
-  // cables en las bandejas del techo
-  const trays = [-0.6, 0.6];
-  const cables = [];
-  for (const tx0 of trays) {
-    ['blue', 'green', 'violet', 'amber', 'blue', 'green'].forEach((c, i) => cables.push({ x: tx0 + (i - 2.5) * 0.035, y: CEIL + 0.12, color: COLORS[c] }));
-  }
-  const packets = [];
+    toggle.addEventListener('click', () => setMenu(!open, true));
+    menu.addEventListener('click', (e) => {
+      if (!open) return;
+      if (e.target.closest('a')) setMenu(false, false);
+      else if (e.target === menu) setMenu(false, true);
+    });
+    const wide = matchMedia('(min-width: 900px)');
+    const onWide = () => { if (wide.matches) setMenu(false, false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide); else wide.addListener(onWide);
 
-  const P = (X, Y, Z) => [vx + (X * f) / Z, vy + (Y * f) / Z];
+    document.querySelectorAll('a[href="#top"]').forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      setMenu(false, false);
+      window.scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    }));
 
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    w = canvas.offsetWidth; h = canvas.offsetHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    f = Math.max(h * 0.85, w * 0.42);
-  }
+    if (!('IntersectionObserver' in window)) return;
+    const sentinel = document.querySelector('.sentinel');
+    if (sentinel) new IntersectionObserver(([e]) => hdr.classList.toggle('is-scrolled', !e.isIntersecting)).observe(sentinel);
 
-  function quad(a, b, c, d) {
-    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineTo(c[0], c[1]); ctx.lineTo(d[0], d[1]); ctx.closePath();
-  }
-
-  function draw(now) {
-    const t = (now - t0) / 1000;
-    tx += (mx - tx) * 0.04; ty += (my - ty) * 0.04;
-    vx = w * 0.5 + tx * w * 0.035;
-    vy = h * 0.42 + ty * h * 0.025;
-    ctx.clearRect(0, 0, w, h);
-
-    // luz fría al fondo del pasillo
-    const glow = ctx.createRadialGradient(vx, vy, 0, vx, vy, Math.max(w, h) * 0.5);
-    glow.addColorStop(0, 'rgba(77,163,255,0.22)');
-    glow.addColorStop(0.25, 'rgba(167,139,250,0.08)');
-    glow.addColorStop(1, 'rgba(7,10,20,0)');
-    ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
-
-    const ZF = Z_START + N_RACKS * (RACK_D + GAP);
-
-    // piso técnico (baldosas) con avance lento: sensación de entrar
-    const tile = 0.6, off = (t * 0.18) % tile;
-    ctx.lineWidth = 1;
-    for (let x = -3; x <= 3.001; x += tile) {
-      const a = P(x, FLOOR, 0.9), b = P(x, FLOOR, ZF);
-      ctx.strokeStyle = 'rgba(77,163,255,0.10)';
-      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
-    }
-    for (let z = 0.9 + tile - off; z < ZF; z += tile) {
-      const a = P(-3, FLOOR, z), b = P(3, FLOOR, z);
-      ctx.strokeStyle = `rgba(77,163,255,${0.16 * Math.min(1, 2.2 / z)})`;
-      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
-    }
-    // franja de luz del pasillo en el piso
-    const s1 = P(-0.25, FLOOR, 0.9), s2 = P(0.25, FLOOR, 0.9), s3 = P(0.25, FLOOR, ZF), s4 = P(-0.25, FLOOR, ZF);
-    quad(s1, s2, s3, s4); ctx.fillStyle = 'rgba(52,224,161,0.035)'; ctx.fill();
-
-    // bandejas y cables del techo
-    for (const tx0 of trays) {
-      const a = P(tx0 - 0.14, CEIL + 0.1, 0.9), b = P(tx0 + 0.14, CEIL + 0.1, 0.9), c = P(tx0 + 0.14, CEIL + 0.1, ZF), d = P(tx0 - 0.14, CEIL + 0.1, ZF);
-      quad(a, b, c, d); ctx.fillStyle = 'rgba(20,30,52,0.55)'; ctx.fill();
-      ctx.strokeStyle = 'rgba(77,163,255,0.18)'; ctx.stroke();
-    }
-    for (const c of cables) {
-      const a = P(c.x, c.y, 0.9), b = P(c.x, c.y, ZF);
-      ctx.strokeStyle = rgba(c.color, 0.22); ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
-    }
-    // paquetes de datos que viajan por los cables hacia ti
-    if (packets.length < 16 && Math.random() < 0.12) {
-      const c = cables[(Math.random() * cables.length) | 0];
-      packets.push({ c, z: ZF, v: 2.5 + Math.random() * 3.5 });
-    }
-    for (let i = packets.length - 1; i >= 0; i--) {
-      const p = packets[i];
-      p.z -= p.v * 0.016;
-      if (p.z < 0.95) { packets.splice(i, 1); continue; }
-      const head = P(p.c.x, p.c.y, p.z), tail = P(p.c.x, p.c.y, p.z + 0.9);
-      const g = ctx.createLinearGradient(tail[0], tail[1], head[0], head[1]);
-      g.addColorStop(0, rgba(p.c.color, 0)); g.addColorStop(1, rgba(p.c.color, 0.95));
-      ctx.strokeStyle = g; ctx.lineWidth = Math.max(1, 3.2 / p.z);
-      ctx.beginPath(); ctx.moveTo(tail[0], tail[1]); ctx.lineTo(head[0], head[1]); ctx.stroke();
-    }
-
-    // racks: del fondo hacia adelante
-    const sorted = racks.slice().sort((a, b) => b.z0 - a.z0);
-    for (const r of sorted) {
-      const X = AISLE * r.side;
-      const a = P(X, FLOOR, r.z0), b = P(X, RACK_TOP, r.z0), c = P(X, RACK_TOP, r.z1), d = P(X, FLOOR, r.z1);
-      const depthFade = Math.min(1, 3.2 / r.z0);
-      // cara del rack (puerta perforada)
-      quad(a, b, c, d);
-      ctx.fillStyle = 'rgba(16,24,44,0.96)'; ctx.fill();
-      ctx.strokeStyle = `rgba(70,92,150,${0.8 * depthFade + 0.15})`; ctx.lineWidth = 1; ctx.stroke();
-      // borde frontal iluminado
-      ctx.strokeStyle = `rgba(77,163,255,${0.55 * depthFade})`; ctx.lineWidth = Math.max(1, 2.4 / r.z0);
-      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); ctx.lineWidth = 1;
-      // cara superior (techo del rack) para dar volumen
-      const X2 = X + 0.5 * r.side;
-      const e = P(X2, RACK_TOP, r.z0), g2 = P(X2, RACK_TOP, r.z1);
-      quad(b, e, g2, c); ctx.fillStyle = 'rgba(18,26,46,0.9)'; ctx.fill();
-      // líneas de cada unidad (U)
-      ctx.strokeStyle = `rgba(60,80,130,${0.45 * depthFade})`;
-      for (let u = 1; u < UNITS; u++) {
-        const y = RACK_TOP + (FLOOR - RACK_TOP) * (u / UNITS);
-        const p1 = P(X, y, r.z0 + 0.02), p2 = P(X, y, r.z1 - 0.02);
-        ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
-      }
-      // LEDs
-      for (const L of r.leds) {
-        const on = ((t * L.speed + L.phase) % 1) < L.duty;
-        const y = RACK_TOP + (FLOOR - RACK_TOP) * ((L.u + 0.5) / UNITS);
-        const z = r.z0 + RACK_D * L.pos;
-        const [px, py] = P(X, y, z);
-        const s = Math.max(1.2, 6 / z);
-        ctx.fillStyle = rgba(L.color, on ? 0.95 * depthFade + 0.05 : 0.12);
-        ctx.fillRect(px - s / 2, py - s / 2, s, s);
-        if (on && z < 6) { ctx.fillStyle = rgba(L.color, 0.22); ctx.fillRect(px - s * 1.6, py - s * 1.6, s * 3.2, s * 3.2); }
-      }
-      // cable que baja del techo al rack
-      if (r.z0 < ZF - 1) {
-        const top = P(X - 0.25 * r.side, CEIL + 0.12, r.z0 + 0.4), bot = P(X - 0.05 * r.side, RACK_TOP, r.z0 + 0.4);
-        ctx.strokeStyle = 'rgba(77,163,255,0.16)'; ctx.lineWidth = Math.max(1, 2 / r.z0);
-        ctx.beginPath(); ctx.moveTo(top[0], top[1]); ctx.quadraticCurveTo(top[0], bot[1], bot[0], bot[1]); ctx.stroke();
-      }
-    }
-
-    // niebla para dar profundidad
-    const fog = ctx.createRadialGradient(vx, vy, 0, vx, vy, Math.max(w, h) * 0.18);
-    fog.addColorStop(0, 'rgba(7,10,20,0.85)'); fog.addColorStop(1, 'rgba(7,10,20,0)');
-    ctx.fillStyle = fog; ctx.fillRect(0, 0, w, h);
-
-    if (!reduceMotion) raf = requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', () => { resize(); if (reduceMotion) draw(performance.now()); });
-  window.addEventListener('pointermove', (e) => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
-
-  if (reduceMotion) { draw(performance.now()); return; }
-  new IntersectionObserver(([e]) => {
-    cancelAnimationFrame(raf);
-    if (e.isIntersecting) raf = requestAnimationFrame(draw);
-  }).observe(canvas);
-})();
-
-/* ---------- Switches de 24 puertos RJ45 con cables de red ---------- */
-(function switches() {
-  const CABLE = ['#4da3ff', '#34e0a1', '#a78bfa', '#fbbf5a', '#4da3ff', '#e5e7eb'];
-  document.querySelectorAll('.switch__ports').forEach((wrap, si) => {
-    const n = +wrap.dataset.ports || 24;
-    let html = '';
-    for (let i = 0; i < n; i++) {
-      const patched = Math.random() < 0.72;
-      const color = CABLE[(i + si * 3) % CABLE.length];
-      const drop = 26 + Math.round(Math.random() * 34);
-      const speed = (0.18 + Math.random() * 0.9).toFixed(2);
-      const delay = (-Math.random() * 2).toFixed(2);
-      html += `<span class="port${patched ? ' port--patched' : ''}" style="--c:${color};--drop:${drop}px;--spd:${speed}s;--dl:${delay}s">` +
-        `<i class="port__led port__led--link"></i><i class="port__led port__led--act"></i>` +
-        `<b class="port__jack"></b>${patched ? '<b class="port__boot"></b><b class="port__cable"></b>' : ''}` +
-        `<em class="port__n">${i + 1}</em></span>`;
-    }
-    wrap.innerHTML = html;
+    const links = [...menu.querySelectorAll('a[href^="#"]')];
+    const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      const a = byId.get(en.target.id);
+      if (!a) return;
+      if (en.isIntersecting) { links.forEach((l) => l.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+      else a.removeAttribute('aria-current');
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    byId.forEach((a, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
   });
-})();
 
-/* ---------- Entrada: arranque del servidor y puertas del rack ---------- */
-(function boot() {
-  const el = document.getElementById('boot');
-  if (!el) return;
-  let seen = false;
-  try { seen = sessionStorage.getItem('bg-boot') === '1'; } catch (e) {}
-  if (reduceMotion || seen) { el.remove(); return; }
-  try { sessionStorage.setItem('bg-boot', '1'); } catch (e) {}
-  document.documentElement.classList.add('is-booting');
-  const log = el.querySelector('.boot__log');
-  const lines = [
-    ['ok', 'Encendiendo rack A-01'],
-    ['ok', 'Switch BG-SW24: 24 puertos RJ45 · 1 Gbps'],
-    ['ok', 'Enlace eth0 activo · full-duplex'],
-    ['ok', 'Montando bases de datos: SQL Server · PostgreSQL'],
-    ['ok', 'API REST escuchando en :443'],
-    ['go', 'Bienvenido al data center de Brian'],
-  ];
-  let i = 0, done = false;
-  const finish = () => {
-    if (done) return; done = true;
-    el.classList.add('is-open');
-    document.documentElement.classList.remove('is-booting');
-    setTimeout(() => el.remove(), 1100);
-  };
-  const next = () => {
-    if (done) return;
-    if (i >= lines.length) { setTimeout(finish, 380); return; }
-    const [k, text] = lines[i++];
-    const li = document.createElement('li');
-    li.innerHTML = k === 'go' ? `<span class="go">&gt;</span> ${text}` : `<span class="ok">[ OK ]</span> ${text}`;
-    log.appendChild(li);
-    setTimeout(next, k === 'go' ? 420 : 230);
-  };
-  el.querySelector('.boot__skip').addEventListener('click', finish);
-  document.addEventListener('keydown', finish, { once: true });
-  setTimeout(next, 250);
-  setTimeout(finish, 4500); // nunca bloquea más de 4.5 s
-})();
+  /* ---------- aparición de secciones (se anima el contenedor interno, nunca la sección) ---------- */
+  mod('reveal', () => {
+    const els = [...document.querySelectorAll('.reveal')];
+    if (RM || !('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('is-in')); return; }
+    const vh = innerHeight;
+    els.forEach((el) => { const r = el.getBoundingClientRect(); if (r.top < vh * 0.85 && r.bottom > 0) el.classList.add('is-in'); });
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+    }), { rootMargin: '0px 0px -15% 0px' });
+    els.forEach((el) => { if (!el.classList.contains('is-in')) io.observe(el); });
+    document.documentElement.classList.add('rv');
+    addEventListener('beforeprint', () => {
+      els.forEach((el) => el.classList.add('is-in'));
+      document.querySelectorAll('img[loading="lazy"]').forEach((im) => { im.loading = 'eager'; });
+    });
+  });
 
-/* ---------- Terminal que escribe la respuesta de /api/me ---------- */
-(function terminal() {
-  const el = document.querySelector('#terminal code');
-  if (!el) return;
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const base = location.origin + location.pathname.replace(/index\.html$/, '').replace(/\/$/, '');
-  const apiUrl = location.hostname.endsWith('vercel.app') ? `${location.origin}/api/me` : `${base}/me.json`;
-  const lines = [
-    ['ps', '$ '], ['cmd', `curl -s ${apiUrl}\n`],
-    ['meta', 'HTTP/1.1 200 OK · content-type: application/json\n\n'],
-    ['p', '{\n'],
-    ['k', '  "nombre"'], ['p', ': '], ['s', '"Brian Guzmán Mañón"'], ['p', ',\n'],
-    ['k', '  "rol"'], ['p', ': '], ['s', '"Junior Backend Developer"'], ['p', ',\n'],
-    ['k', '  "trabajo"'], ['p', ': '], ['s', '"Fraud Analyst Jr. @ MIO"'], ['p', ',\n'],
-    ['k', '  "ubicacion"'], ['p', ': '], ['s', '"Santo Domingo, RD"'], ['p', ',\n'],
-    ['k', '  "busca"'], ['p', ': '], ['s', '"pasantía o puesto junior en backend"'], ['p', ',\n'],
-    ['k', '  "disponible"'], ['p', ': '], ['b', 'true'], ['p', '\n}\n'],
-  ];
-  const cls = { ps: 't-ps', cmd: 't-cmd', meta: 't-meta', k: 't-key', s: 't-str', b: 't-bool', p: '' };
-  const render = (upto) => {
-    let html = '', left = upto;
-    for (const [type, text] of lines) {
-      if (left <= 0) break;
-      const part = text.slice(0, left); left -= text.length;
-      html += cls[type] ? `<span class="${cls[type]}">${esc(part)}</span>` : esc(part);
+  /* ---------- registro de la visita: la hora real de cada salto en su etiqueta y en el monitor de Experiencia ----------
+     Es la traza de esta visita tal como la ve el navegador. No se guarda ni se envía nada. */
+  mod('visita', () => {
+    if (!('IntersectionObserver' in window)) return;
+    const secs = [...document.querySelectorAll('.sec[data-hop]')];
+    const box = document.querySelector('.visit'), list = box && box.querySelector('.visit__log');
+    const two = (n) => String(n).padStart(2, '0');
+    const hms = (d) => `${two(d.getHours())}:${two(d.getMinutes())}:${two(d.getSeconds())}`;
+    const since = (ms) => {
+      const s = Math.max(0, ms) / 1000;
+      if (s < 10) return '+' + s.toFixed(1).replace('.', ',') + ' s';
+      return s < 60 ? '+' + Math.round(s) + ' s' : '+' + Math.round(s / 60) + ' min';
+    };
+    const add = (cells) => {
+      if (!list) return;
+      const cur = list.querySelector('.cur'); if (cur) cur.classList.remove('cur');
+      const li = document.createElement('li');
+      cells.forEach(([k, t], i) => {
+        if (i) li.appendChild(document.createTextNode('  '));
+        const s = li.appendChild(document.createElement('span'));
+        if (k) s.className = k;
+        s.textContent = t;
+      });
+      li.className = 'cur';
+      list.appendChild(li);
+    };
+    let prev = performance.timeOrigin || (Date.now() - performance.now());
+    add([['t', hms(new Date(prev))], ['m', 'GET'], ['', '/'.padEnd(13)], ['s', '200'], ['d', 'inicio']]);
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const now = Date.now(), d = new Date(now), hop = en.target.querySelector('.hop');
+      if (hop && !hop.querySelector('.hop__t')) { const t = hop.appendChild(document.createElement('span')); t.className = 'hop__t'; t.textContent = hms(d); }
+      add([['t', hms(d)], ['m', 'GET'], ['', ('/#' + en.target.id).padEnd(13)], ['s', '200'], ['d', since(now - prev)]]);
+      prev = now;
+      if (en.target.id === 'contacto') add([['ok', '→ 200 OK · respuesta entregada']]);
+    }), { rootMargin: '0px 0px -25% 0px' });
+    secs.forEach((s) => io.observe(s));
+    if (box) { box.hidden = false; box.parentElement.classList.add('is-on'); }
+  });
+
+  /* ---------- «Pausar animaciones»: html.anim-off congela todos los bucles; escena.js escucha 'anim-pausa' ---------- */
+  mod('pausa', () => {
+    const btn = document.querySelector('.scene-toggle');
+    if (!btn || RM) return; // con movimiento reducido no hay bucles que pausar
+    const root = document.documentElement, label = btn.querySelector('.scene-toggle__t');
+    let off = root.classList.contains('anim-off');
+    const paint = () => {
+      root.classList.toggle('anim-off', off);
+      label.textContent = off ? 'Reanudar animaciones' : 'Pausar animaciones';
+      btn.classList.toggle('is-off', off);
+    };
+    btn.addEventListener('click', () => {
+      off = !off;
+      try { localStorage.setItem('escena-pausada', off ? '1' : '0'); } catch (_) { /* sin almacenamiento */ }
+      paint();
+      document.dispatchEvent(new Event('anim-pausa'));
+    });
+    paint();
+    btn.hidden = false;
+  });
+
+  /* ---------- animaciones de una sola vez y pausa fuera de pantalla ---------- */
+  mod('once', () => {
+    const items = [[document.querySelector('.chain-wrap'), 'is-run'], [document.querySelector('.log__e--scan'), 'is-scan']];
+    items.forEach(([el, cls]) => {
+      if (!el) return;
+      if (RM || !('IntersectionObserver' in window)) { el.classList.add(cls); return; }
+      const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { el.classList.add(cls); io.disconnect(); } }, { threshold: 0.5 });
+      io.observe(el);
+    });
+    if (!('IntersectionObserver' in window)) return;
+    const off = new IntersectionObserver((entries) => entries.forEach((en) => en.target.classList.toggle('is-offscreen', !en.isIntersecting)), { rootMargin: '80px 0px' });
+    document.querySelectorAll('.sec, .switch').forEach((el) => off.observe(el));
+  });
+
+  /* ---------- traza lateral (≥1100 px) o línea de progreso bajo el header ---------- */
+  mod('rail', () => {
+    const secs = [...document.querySelectorAll('.sec[data-hop]')];
+    const MQ = matchMedia('(min-width: 1100px) and (min-aspect-ratio: 4001/3000)');
+    const bar = document.querySelector('.progress i');
+    const rail = document.createElement('div');
+    rail.className = 'rail';
+    rail.setAttribute('aria-hidden', 'true');
+    rail.appendChild(document.createElement('i')).className = 'rail__line';
+    const nodes = secs.map((s) => {
+      const n = rail.appendChild(document.createElement('span'));
+      n.className = 'rail__node';
+      n.appendChild(document.createElement('em')).textContent = s.dataset.hop;
+      return n;
+    });
+    const pkt = rail.appendChild(document.createElement('i'));
+    pkt.className = 'rail__pkt';
+    pkt.appendChild(document.createElement('em')).textContent = '200 OK';
+    document.body.appendChild(rail);
+
+    const hero = document.querySelector('.sala');
+    /* Un nodo se enciende cuando el inicio de su sección cruza la mitad de la ventana: el mismo umbral que
+       marca la sección actual en el menú. Los nodos se colocan donde el paquete está en ese instante. */
+    let on = MQ.matches, tops = [], max = 1, railH = 0, heroH = 0, half = 0, shown = false, ticking = false, lit = -2, okShown = false;
+    function update() {
+      ticking = false;
+      const y = window.scrollY, p = Math.min(1, Math.max(0, y / max));
+      if (on) {
+        const vis = y > heroH * 0.55;
+        if (vis !== shown) { shown = vis; rail.classList.toggle('is-on', vis); }
+        pkt.style.transform = `translateY(${(p * railH).toFixed(1)}px)`;
+        let a = -1;
+        tops.forEach((t, i) => { if (y + 2 >= Math.min(Math.max(0, t - half), max)) a = i; });
+        if (a !== lit) {
+          lit = a;
+          nodes.forEach((n, i) => { n.classList.toggle('is-lit', i <= a); n.classList.toggle('is-active', i === a); });
+          if (a === nodes.length - 1 && !okShown) { okShown = true; pkt.classList.add('is-ok'); setTimeout(() => pkt.classList.remove('is-ok'), 2600); }
+          else if (a !== nodes.length - 1) pkt.classList.remove('is-ok'); // al volver a subir, «200 OK» no acompaña al paquete
+        }
+      } else if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
     }
-    el.innerHTML = html + '<span class="caret"></span>';
-  };
-  const total = lines.reduce((n, [, t]) => n + t.length, 0);
-  if (reduceMotion) { render(total); return; }
-  render(0);
-  let started = false;
-  new IntersectionObserver(([e], obs) => {
-    if (!e.isIntersecting || started) return;
-    started = true; obs.disconnect();
-    let i = 0;
-    const tick = () => {
-      i += i < 50 ? 1 : 3;          // el comando se "teclea" y la respuesta llega más rápido
-      render(i);
-      if (i < total) setTimeout(tick, i < 50 ? 38 : 12);
-    };
-    tick();
-  }, { threshold: 0.4 }).observe(el);
+    function measure() {
+      on = MQ.matches;
+      max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      railH = rail.clientHeight;
+      heroH = hero ? hero.offsetHeight : 0;
+      half = innerHeight * 0.5;
+      tops = secs.map((s) => s.getBoundingClientRect().top + window.scrollY);
+      nodes.forEach((n, i) => {
+        const top = railH * Math.min(1, Math.max(0, tops[i] - half) / max);
+        n.style.top = top.toFixed(1) + 'px';
+        n.classList.toggle('is-up', top + 14 + n.firstChild.offsetHeight > railH + 36); // la etiqueta vertical sube si no cabe debajo
+      });
+      lit = -2;
+      update();
+    }
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    /* El alto de la ventana puede cambiar sin que cambie el body (F11, barra de descargas, DevTools). */
+    let mTick = false;
+    const remeasure = () => { if (!mTick) { mTick = true; requestAnimationFrame(() => { mTick = false; measure(); }); } };
+    if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.body);
+    addEventListener('resize', remeasure, { passive: true });
+    if (MQ.addEventListener) MQ.addEventListener('change', measure); else MQ.addListener(measure);
+    measure();
+  });
+
+  /* ---------- GET /api/me: al abrir la ficha se pide el JSON real y se mide en el navegador ---------- */
+  mod('apiMe', () => {
+    const det = document.querySelector('details.api');
+    if (!det) return;
+    const base = location.origin + location.pathname.replace(/index\.html$/, '').replace(/\/$/, '');
+    const apiUrl = location.hostname.endsWith('vercel.app') ? `${location.origin}/api/me` : `${base}/me.json`;
+    const link = det.querySelector('.api__link'), path = det.querySelector('.api__path');
+    if (link) link.href = apiUrl;
+    if (path) path.textContent = 'GET ' + new URL(apiUrl).pathname;
+    const code = det.querySelector('.api__code'), ms = det.querySelector('[data-ms]'), status = det.querySelector('.api__status');
+    let asked = false;
+    det.addEventListener('toggle', () => {
+      if (!det.open || asked || !window.fetch) return;
+      asked = true;
+      const t0 = performance.now();
+      fetch(apiUrl, { cache: 'no-store' })
+        .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then((data) => { code.textContent = JSON.stringify(data, null, 2); ms.textContent = String(Math.max(1, Math.round(performance.now() - t0))); })
+        .catch(() => { status.textContent = 'Sin conexión: mostrando la copia local'; });
+    });
+  });
+
+  /* ---------- año del footer ---------- */
+  mod('year', () => { const y = document.getElementById('year'); if (y) y.textContent = String(new Date().getFullYear()); });
 })();
-
-/* ---------- Contadores ---------- */
-(function counters() {
-  const nums = document.querySelectorAll('[data-count]');
-  const run = (el) => {
-    const target = +el.dataset.count;
-    if (reduceMotion) { el.textContent = target; return; }
-    const start = performance.now(), dur = 900;
-    const step = (now) => {
-      const t = Math.min(1, (now - start) / dur);
-      el.textContent = Math.round(target * t);
-      if (t < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-    setTimeout(() => { el.textContent = target; }, dur + 400);
-  };
-  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
-  }));
-  nums.forEach((n) => io.observe(n));
-})();
-
-/* ---------- Aparición de secciones ---------- */
-const sections = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window && !reduceMotion) {
-  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
-  }), { threshold: 0.06 });
-  sections.forEach((s) => io.observe(s));
-} else {
-  sections.forEach((s) => s.classList.add('is-visible'));
-}
-
-document.getElementById('year').textContent = new Date().getFullYear();

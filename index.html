@@ -1,416 +1,526 @@
 <!doctype html>
 <html lang="es">
 <head>
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('escena-pausada')==='1')document.documentElement.classList.add('anim-off')}catch(e){}</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Brian Guzmán Mañón · Junior Backend Developer</title>
   <meta name="description" content="Portafolio de Brian Guzmán Mañón, Junior Backend Developer (C#, ASP.NET Core, Node.js, SQL), Fraud Analyst Jr. en MIO y estudiante de Desarrollo de Software en el ITLA.">
-  <meta name="theme-color" content="#070b10">
+  <meta name="theme-color" content="#070a14">
+  <link rel="canonical" href="https://printbriandev.github.io/portafolio/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Brian Guzmán Mañón · Junior Backend Developer">
   <meta property="og:description" content="C#, ASP.NET Core, Node.js y SQL. Proyectos reales, freelance y académicos, construidos con ayuda de IA.">
   <meta property="og:url" content="https://printbriandev.github.io/portafolio/">
-  <meta property="og:image" content="https://printbriandev.github.io/portafolio/img/og-v2.jpg">
+  <meta property="og:image" content="https://printbriandev.github.io/portafolio/img/og-v3.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Brian Guzmán Mañón, Junior Backend Developer">
   <meta property="og:locale" content="es_DO">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://printbriandev.github.io/portafolio/img/og-v2.jpg">
+  <meta name="twitter:image" content="https://printbriandev.github.io/portafolio/img/og-v3.jpg">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Brian Guzmán Mañón","jobTitle":"Junior Backend Developer","url":"https://printbriandev.github.io/portafolio/","email":"mailto:brianagmdev@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Santo Domingo Este","addressCountry":"DO"},"sameAs":["https://github.com/Printbriandev","https://www.linkedin.com/in/brian-guzman-manon"]}</script>
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(min-width: 900px) and (min-aspect-ratio: 4001/3000)" imagesrcset="img/escena-1280.webp 1280w, img/escena-1920.webp 1920w, img/escena-2560.webp 2560w" imagesizes="(min-aspect-ratio: 43/24) 100vw, 179vh">
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 899px), (max-aspect-ratio: 4/3)" imagesrcset="img/escena-movil-1040.webp 1040w, img/escena-movil-1560.webp 1560w" imagesizes="(min-aspect-ratio: 21/25) 100vw, 84vh">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <script src="escena.js" defer></script>
 </head>
 <body>
   <div id="top" aria-hidden="true"></div>
   <a class="skip" href="#main">Saltar al contenido</a>
 
-  <div class="boot" id="boot" aria-hidden="true">
-    <div class="boot__door boot__door--l"><span class="boot__handle"></span></div>
-    <div class="boot__door boot__door--r"><span class="boot__handle"></span></div>
-    <div class="boot__panel mono">
-      <p class="boot__title"><i class="led"></i> BG-DC01 · iniciando servidor</p>
-      <ul class="boot__log"></ul>
-      <button class="boot__skip mono" type="button">entrar →</button>
-    </div>
-  </div>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-1.97c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6.5 0h3.8v1.7h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-3.97v-5.55c0-1.32-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94V21H9.5V9Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.4"/></g></symbol>
+  </svg>
 
-  <header class="nav">
-    <div class="wrap nav__inner">
-      <a class="brand" href="#top" aria-label="Inicio">
-        <span class="brand__mark mono">BG</span>
-        <span class="brand__name">brian<span class="accent">@</span>backend<span class="blink">_</span></span>
+  <div class="sentinel" aria-hidden="true"></div>
+
+  <header class="hdr">
+    <div class="hdr__in">
+      <a class="brand" href="#top" aria-label="Brian Guzmán, inicio">
+        <span class="brand__mark" aria-hidden="true">BG</span>
+        <span class="brand__name">Brian Guzmán</span>
       </a>
-      <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
+      <button class="hdr__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
-      <nav id="menu" class="nav__menu mono">
-        <a href="#sobre-mi">/sobre-mi</a>
-        <a href="#proyectos">/proyectos</a>
-        <a href="#ia">/ia</a>
-        <a href="#stack">/stack</a>
-        <a href="#experiencia">/experiencia</a>
-        <a href="#contacto" class="nav__cta">/contacto</a>
+      <nav id="menu" class="menu" aria-label="Secciones">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#ia">IA</a>
+        <a href="#stack">Stack</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#contacto" class="menu__cta">Contacto</a>
       </nav>
     </div>
+    <div class="progress" aria-hidden="true"><i></i></div>
   </header>
 
-  <main id="main">
-    <div class="backbone" aria-hidden="true"></div>
-    <!-- HERO -->
-    <section class="hero">
-      <canvas class="hero__grid" id="grid" aria-hidden="true"></canvas>
-      <div class="wrap hero__inner">
-        <div class="hero__text">
-          <p class="eyebrow mono"><span class="prompt">$</span> <span id="typed-whoami">whoami</span><span class="caret"></span></p>
-          <h1>Brian Guzmán<br><span class="grad">Mañón</span></h1>
-          <p class="hero__role mono">Junior Backend Developer</p>
-          <p class="hero__lead">
-            Construyo <strong>APIs y sitios web</strong> con <strong>C#, ASP.NET Core, Node.js y SQL</strong>.
-            Soy <strong>Fraud Analyst Jr. en MIO</strong>, una fintech dominicana de pagos, y estudio Desarrollo de
-            Software en el <strong>ITLA</strong>.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="#proyectos"><span class="mono">GET</span> /proyectos</a>
-            <a class="btn btn--ghost" href="CV-Brian-Guzman-Manon.pdf" target="_blank" rel="noopener">Descargar CV ↓</a>
+  <main id="main" tabindex="-1">
+    <!-- INICIO: foto fija + código de ejemplo que escena.js escribe en vivo sobre sus pantallas -->
+    <section class="sala" id="inicio" aria-labelledby="hero-title">
+      <div class="scene">
+        <div class="scene__dolly">
+          <div class="scene__cam">
+            <picture>
+              <source media="(max-width: 899px), (max-aspect-ratio: 4/3)" type="image/webp" srcset="img/escena-movil-1040.webp 1040w, img/escena-movil-1560.webp 1560w" sizes="(min-aspect-ratio: 21/25) 100vw, 84vh" width="1560" height="1000">
+              <source media="(max-width: 899px), (max-aspect-ratio: 4/3)" srcset="img/escena-movil-1040.jpg" width="1560" height="1000">
+              <source type="image/webp" srcset="img/escena-1280.webp 1280w, img/escena-1920.webp 1920w, img/escena-2560.webp 2560w" sizes="(min-aspect-ratio: 43/24) 100vw, 179vh">
+              <img class="scene__img" src="img/escena-1920.jpg" width="2752" height="1536" fetchpriority="high" alt="Escena ilustrativa generada con IA: desarrolladores de espaldas programando frente a varios monitores en un centro de datos">
+            </picture>
+            <div class="stage" aria-hidden="true"></div>
           </div>
-          <ul class="hero__links mono">
-            <li><a href="https://github.com/Printbriandev" target="_blank" rel="noopener">github</a></li>
-            <li><a href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener">linkedin</a></li>
-            <li><a href="mailto:brianagmdev@gmail.com">email</a></li>
-          </ul>
         </div>
-
-        <figure class="node" aria-label="Foto de Brian Guzmán">
-          <div class="node__bar mono">
-            <span class="dots"><i></i><i></i><i></i></span>
-            <span>node-01 · santo-domingo</span>
-            <span class="status"><i class="led"></i>online</span>
-          </div>
-          <div class="node__frame">
-            <img src="img/brian-perfil.jpg" alt="Brian Guzmán Mañón" width="800" height="800" fetchpriority="high">
-            <span class="scan" aria-hidden="true"></span>
-            <span class="corner corner--tl"></span><span class="corner corner--tr"></span>
-            <span class="corner corner--bl"></span><span class="corner corner--br"></span>
-          </div>
-          <figcaption class="node__meta mono">
-            <span><b>estado</b> disponible para pasantía o puesto junior</span>
-          </figcaption>
-        </figure>
+        <div class="scene__scrim" aria-hidden="true"></div>
+        <p class="scene__tag" aria-hidden="true">Escena generada con IA · datos ficticios</p>
       </div>
 
-      <div class="wrap">
-        <ul class="metrics mono" aria-label="Resumen">
-          <li><b data-count="8">0</b><span>proyectos</span></li>
-          <li><b data-count="3">0</b><span>clientes freelance</span></li>
-          <li><b data-count="1">0</b><span>en producción</span></li>
-          <li><b data-count="7">0</b><span>certificaciones</span></li>
+      <div class="sala__copy">
+        <p class="chip">
+          <img class="chip__av" src="img/brian-avatar-96.webp" srcset="img/brian-avatar-96.webp 1x, img/brian-avatar-192.webp 2x" width="40" height="40" alt="">
+          <i class="dot" aria-hidden="true"></i>
+          <span>Disponible para pasantía o puesto junior</span>
+        </p>
+        <p class="kicker"><span lang="en">Junior Backend Developer</span> · <span lang="en">Fraud Analyst Jr.</span></p>
+        <h1 id="hero-title">Brian Guzmán <span>Mañón</span></h1>
+        <p class="tagline">Backend con mentalidad antifraude.</p>
+        <p class="sala__lead">Construyo <strong>APIs y sitios web</strong> con <strong>C#, ASP.NET Core, Node.js y SQL</strong>. Soy <strong><span lang="en">Fraud Analyst Jr.</span> en MIO</strong>, una fintech dominicana de pagos, y estudio Desarrollo de Software en el <strong>ITLA</strong>.</p>
+        <div class="cta">
+          <a class="btn btn--pri" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn--ghost" href="CV-Brian-Guzman-Manon.pdf" download>Descargar CV <span aria-hidden="true">↓</span></a>
+        </div>
+        <ul class="icons">
+          <li><a href="https://github.com/Printbriandev" target="_blank" rel="noopener" aria-label="GitHub (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-gh"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener" aria-label="LinkedIn (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-in"/></svg></a></li>
+          <li><a href="mailto:brianagmdev@gmail.com" aria-label="Escribir a brianagmdev@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg></a></li>
         </ul>
+      </div>
+
+      <div class="sala__meta">
+        <p class="credit">Escena ilustrativa generada con IA · el código y los datos de las pantallas son ficticios<span class="credit__live"> y se escriben en vivo</span>.</p>
+        <button type="button" class="scene-toggle" hidden>
+          <svg class="scene-toggle__i" viewBox="0 0 16 16" aria-hidden="true"><path class="i-pause" d="M4 3h3v10H4zM9 3h3v10H9z"/><path class="i-play" d="M4.5 2.5v11L13 8z"/></svg>
+          <span class="scene-toggle__t">Pausar animaciones</span>
+        </button>
       </div>
     </section>
 
-
     <div class="switch" aria-hidden="true">
-      <div class="wrap switch__inner">
+      <div class="switch__in">
         <span class="switch__ear"></span>
-        <div class="switch__label mono"><b>BG-SW24-CORE</b><span>24× RJ45 · 1 Gbps</span></div>
-        <div class="switch__ports" data-ports="24"></div>
-        <div class="switch__uplink mono"><span class="sfp"></span><span class="sfp"></span><em>SFP+</em></div>
+        <span class="switch__label"><b>BG-SW24-CORE</b><em>24× RJ45 · 1 Gbps</em></span>
+        <span class="switch__ports"><i class="p on c1"></i><i class="p on"></i><i class="p on c2"></i><i class="p"></i><i class="p on"></i><i class="p"></i><i class="p on c1"></i><i class="p on"></i><i class="p"></i><i class="p"></i><i class="p on"></i><i class="p"></i><i class="p on"></i><i class="p"></i><i class="p"></i><i class="p on c2"></i><i class="p"></i><i class="p on"></i><i class="p"></i><i class="p"></i><i class="p on"></i><i class="p"></i><i class="p"></i><i class="p on"></i></span>
+        <span class="switch__sfp"><i></i><i></i><em>SFP+</em></span>
         <span class="switch__ear"></span>
       </div>
     </div>
 
     <!-- SOBRE MÍ -->
-    <section id="sobre-mi" class="section reveal">
-      <div class="wrap">
-        <header class="endpoint"><span class="method">GET</span><h2>/sobre-mi</h2><span class="code">200 OK</span></header>
-        <div class="about">
-          <figure class="about__photo">
-            <img src="img/brian-graduacion.jpg" alt="Brian Guzmán Mañón en su foto de graduación" width="800" height="1000" loading="lazy">
-            <figcaption class="mono">// listo para el siguiente nivel</figcaption>
-          </figure>
-          <div class="about__body">
-            <div class="prose">
-              <p>
-                Me gusta el backend: diseñar APIs, modelar datos y que todo funcione de forma segura detrás de la
-                pantalla. En MIO monitoreo transacciones e investigo casos sospechosos. Eso me enseñó a pensar en
-                cómo se rompe un sistema y cómo protegerlo.
-              </p>
-              <p>
-                Tengo un proyecto en producción para un cliente real y proyectos académicos con arquitectura en
-                capas, Git Flow y pruebas. Busco mi primera oportunidad formal como desarrollador para seguir
-                creciendo.
-              </p>
+    <section id="sobre-mi" class="sec reveal" data-hop="salto 1 · cliente" aria-labelledby="h-sobre">
+      <div class="wrap reveal__in about">
+        <header class="sec__head about__head">
+          <p class="hop" aria-hidden="true"><i></i>salto 1 · cliente</p>
+          <h2 id="h-sobre">Sobre mí</h2>
+        </header>
+        <figure class="portrait">
+          <div class="portrait__frame">
+            <picture>
+              <source type="image/webp" srcset="img/brian-retrato-560.webp 560w, img/brian-retrato-800.webp 800w, img/brian-retrato-1200.webp 1200w" sizes="(min-width: 1100px) 460px, (min-width: 900px) 40vw, 92vw">
+              <img src="img/brian-retrato-800.jpg" width="1856" height="2304" loading="lazy" decoding="async" alt="Retrato de Brian Guzmán Mañón generado con IA: sonriendo, de brazos cruzados, en un pasillo de servidores">
+            </picture>
+          </div>
+          <figcaption>Retrato creado con IA</figcaption>
+        </figure>
+        <div class="about__body">
+          <p class="serif">Hola, soy Brian.</p>
+          <p>Me gusta el backend: diseñar APIs, modelar datos y que todo funcione de forma segura detrás de la pantalla. En MIO monitoreo transacciones e investigo casos sospechosos. Eso me enseñó a pensar en cómo se rompe un sistema y cómo protegerlo.</p>
+          <p>Tengo un proyecto en producción para un cliente real y proyectos académicos con arquitectura en capas, Git Flow y pruebas. Busco mi primera oportunidad formal como desarrollador para seguir creciendo.</p>
+
+          <h3 class="h3">Doble perfil</h3>
+          <div class="duo">
+            <div class="duo__side">
+              <p class="label">Backend</p>
+              <p>APIs REST con C# y ASP.NET Core o con Node.js y Express, y datos en SQL Server y PostgreSQL.</p>
             </div>
-            <div class="terminal" aria-label="Respuesta JSON de ejemplo con mis datos">
-              <div class="terminal__bar mono"><span class="dots"><i></i><i></i><i></i></span><span>bash — api/me</span></div>
-              <pre class="terminal__body mono" id="terminal"><code></code></pre>
+            <div class="duo__side duo__side--af">
+              <p class="label">Antifraude</p>
+              <p>Consultas SQL en Elastic, CyberSource, Sentinel y análisis de Visa y Mastercard.</p>
             </div>
           </div>
+
+          <h3 class="h3">Ficha</h3>
+          <dl class="ficha">
+            <div><dt>Perfil</dt><dd lang="en">Junior Backend Developer</dd></div>
+            <div><dt>Hoy</dt><dd><span lang="en">Fraud Analyst Jr.</span> en MIO, fintech dominicana de pagos (desde oct 2025)</dd></div>
+            <div><dt>Estudios</dt><dd>Estudiante · Tecnólogo en Desarrollo de Software · ITLA · may 2024 – en curso</dd></div>
+            <div><dt>Base</dt><dd>Santo Domingo Este, República Dominicana</dd></div>
+            <div><dt>Idiomas</dt><dd>Español nativo · Inglés intermedio</dd></div>
+            <div><dt>Busca</dt><dd>Pasantía o puesto junior en backend</dd></div>
+          </dl>
+
+          <details class="api">
+            <summary><span>Ver mis datos como JSON · <code class="api__path">GET me.json</code></span></summary>
+            <figure role="figure" aria-label="Respuesta JSON con mis datos">
+<pre><code class="api__code">{
+  "nombre": "Brian Guzmán Mañón",
+  "rol": "Junior Backend Developer",
+  "trabajo": "Fraud Analyst Jr. @ MIO",
+  "ubicacion": "Santo Domingo, RD",
+  "busca": "pasantía o puesto junior en backend",
+  "disponible": true
+}</code></pre>
+              <figcaption><span class="api__status">HTTP 200 · <span data-ms>—</span> ms, medido en tu navegador</span> <a class="api__link" href="me.json">Abrir JSON <span aria-hidden="true">↗</span></a></figcaption>
+            </figure>
+          </details>
         </div>
       </div>
     </section>
 
     <!-- PROYECTOS -->
-    <section id="proyectos" class="section reveal">
-      <div class="wrap">
-        <header class="endpoint"><span class="method">GET</span><h2>/proyectos</h2><span class="code">200 OK</span></header>
+    <section id="proyectos" class="sec reveal" data-hop="salto 2 · api" aria-labelledby="h-proy">
+      <div class="wrap reveal__in">
+        <header class="sec__head">
+          <p class="hop" aria-hidden="true"><i></i>salto 2 · api</p>
+          <h2 id="h-proy">Proyectos</h2>
+          <p class="sec__lead">Tres casos con su contexto técnico (dos freelance y uno académico) y, debajo, el resto de proyectos académicos.</p>
+        </header>
 
-        <div class="filters mono" role="group" aria-label="Filtrar proyectos">
-          <button class="chip is-active" data-filter="all">?tipo=todos</button>
-          <button class="chip" data-filter="freelance">?tipo=freelance</button>
-          <button class="chip" data-filter="academico">?tipo=academico</button>
-        </div>
-
-        <div class="grid">
-          <article class="card card--featured" data-type="freelance">
-            <div class="card__top mono">
-              <span class="badge badge--live"><i class="led"></i>en producción</span>
-              <span class="card__date">jun 2026</span>
+        <article class="case case--mts" id="caso-mts" aria-labelledby="h-mts">
+          <div class="case__media">
+            <div class="monitor">
+              <picture>
+                <source type="image/webp" srcset="img/caso-mts-960.webp 960w, img/caso-mts-1440.webp 1440w" sizes="(min-width: 1600px) 590px, (min-width: 1100px) 530px, (min-width: 900px) 44vw, calc(100vw - 94px)">
+                <img src="img/caso-mts-960.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Página de inicio del sitio de MTS Tattoo Studio">
+              </picture>
             </div>
-            <h3>MTS Tattoo Studio</h3>
-            <p class="card__kind mono">sitio web + API · freelance</p>
-            <p>
-              Sitio para un estudio de tatuajes con galería por estilos, reservas de citas y opiniones moderadas.
-              API en Node.js y Express con validación, rate limiting y Helmet/CSP; datos en Supabase (PostgreSQL con
-              RLS) y avisos al estudio por WhatsApp y correo.
-            </p>
-            <div class="flow mono" aria-hidden="true">
-              <span>cliente</span><i></i><span>express</span><i></i><span>supabase</span><i></i><span>whatsapp</span>
+            <div class="flow" aria-hidden="true">
+              <span class="flow__n">Cliente</span><span class="flow__n">Express</span><span class="flow__n">Supabase</span><span class="flow__n">WhatsApp / correo</span>
             </div>
-            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>Supabase</li><li>Vercel</li><li>GitHub Actions</li></ul>
-            <div class="card__links mono"><a href="https://mts-tattoo-studio-frontend.vercel.app" target="_blank" rel="noopener">ver sitio ↗</a></div>
-          </article>
+          </div>
+          <div class="case__body">
+            <p class="case__n">Caso 01</p>
+            <h3 id="h-mts" class="case__title">MTS Tattoo Studio</h3>
+            <p class="meta"><span class="badge badge--live"><i></i>En producción</span> jun 2026 · sitio web + API · freelance</p>
+            <dl class="case__dl">
+              <dt>Qué hace</dt>
+              <dd>Sitio para un estudio de tatuajes con galería por estilos, reservas de citas y opiniones moderadas.</dd>
+              <dt>Cómo está hecho</dt>
+              <dd>API en Node.js y Express con validación, rate limiting y Helmet/CSP; datos en Supabase (PostgreSQL con RLS) y avisos al estudio por WhatsApp y correo. Frontend estático en HTML, CSS y JavaScript.</dd>
+              <dt>Riesgo → defensa</dt>
+              <dd>
+                <ul class="risks">
+                  <li>Abuso del formulario de reservas → rate limiting</li>
+                  <li>Datos de entrada inválidos → validación y saneado de campos en la API</li>
+                  <li>Scripts inyectados (XSS) → cabeceras de seguridad con Helmet y CSP</li>
+                  <li>Acceso a datos que no corresponden → RLS en PostgreSQL</li>
+                  <li>Opiniones no deseadas → moderación antes de publicarse</li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+          <!-- en escritorio va en la columna del monitor, bajo el flujo; en móvil, al final del caso como antes -->
+          <div class="case__foot">
+            <dl class="case__dl">
+              <dt>Stack</dt>
+              <dd class="stackline">Node.js · Express · PostgreSQL · Supabase · Vercel · GitHub Actions</dd>
+            </dl>
+            <a class="link" href="https://mts-tattoo-studio-frontend.vercel.app" target="_blank" rel="noopener">Ver sitio <span aria-hidden="true">↗</span><span class="sr-only"> de MTS Tattoo Studio (se abre en otra pestaña)</span></a>
+          </div>
+        </article>
 
-          <article class="card" data-type="freelance">
-            <div class="card__top mono"><span class="badge badge--wip">prototipo</span><span class="card__date">oct 2026</span></div>
-            <h3>J.A.S Smokehouse &amp; Grill</h3>
-            <p class="card__kind mono">web app · freelance</p>
-            <p>Menú digital por código QR con carrito, envío del pedido por WhatsApp con un código de ticket y panel para que el restaurante vea los pedidos.</p>
-            <ul class="tags mono"><li>Next.js</li><li>TypeScript</li><li>React</li><li>Tailwind CSS</li><li>Zod</li><li>Vercel</li></ul>
-            <div class="card__links mono"><a href="https://jas-smokehouse-web.vercel.app" target="_blank" rel="noopener">ver prototipo ↗</a></div>
-          </article>
-
-          <article class="card" data-type="freelance">
-            <div class="card__top mono"><span class="badge badge--wip">en desarrollo</span><span class="card__date">sep 2026</span></div>
-            <h3>Sitio para una inmobiliaria</h3>
-            <p class="card__kind mono">sitio web · freelance · santo domingo este</p>
-            <p>Requerimientos, mapa del sitio, propuesta visual y propuesta económica entregados. La construcción avanza según el contenido de la clienta.</p>
-            <ul class="tags mono"><li>Requerimientos</li><li>UX</li><li>HTML/CSS</li></ul>
-          </article>
-
-          <article class="card" data-type="academico">
-            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">jun – jul 2026</span></div>
-            <h3>Autogest-Pro</h3>
-            <p class="card__kind mono">gestión de taller mecánico · programación III</p>
+        <article class="case case--autogest" id="caso-autogest" aria-labelledby="h-auto">
+          <div class="case__media">
+            <ol class="layers" aria-label="Capas de la solución">
+              <li><i aria-hidden="true"></i>Web</li>
+              <li><i aria-hidden="true"></i>Api</li>
+              <li><i aria-hidden="true"></i>Application</li>
+              <li><i aria-hidden="true"></i>Domain</li>
+              <li><i aria-hidden="true"></i>Infrastructure</li>
+            </ol>
+          </div>
+          <div class="case__body">
+            <p class="case__n">Caso 02</p>
+            <h3 id="h-auto" class="case__title">Autogest-Pro</h3>
+            <p class="meta"><span class="badge">Académico</span> jun – jul 2026 · gestión de taller mecánico · Programación III</p>
             <p>Solución .NET en capas (Api, Application, Domain, Infrastructure y Web) con EF Core, SQL Server y frontend en React. Trabajo en equipo con ramas y pull requests.</p>
-            <ul class="tags mono"><li>C#</li><li>ASP.NET Core</li><li>EF Core</li><li>SQL Server</li><li>React</li></ul>
-            <div class="card__links mono"><a href="https://github.com/Printbriandev/Autogest-Pro" target="_blank" rel="noopener">código ↗</a></div>
-          </article>
+            <p class="note">Versión académica, sin despliegue público.</p>
+            <p class="stackline"><span class="label">Stack</span> C# · ASP.NET Core · EF Core · SQL Server · React</p>
+            <a class="link" href="https://github.com/Printbriandev/Autogest-Pro" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span><span class="sr-only"> de Autogest-Pro (se abre en otra pestaña)</span></a>
+          </div>
+        </article>
 
-          <article class="card" data-type="academico">
-            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2026</span></div>
-            <h3>Sistema de Reservas de Citas</h3>
-            <p class="card__kind mono">api rest · programación III</p>
-            <p>API para agendar citas entre clientes y profesionales respetando reglas de disponibilidad. Documentación con Swagger y pruebas con pytest.</p>
-            <ul class="tags mono"><li>Python</li><li>FastAPI</li><li>SQLAlchemy</li><li>pytest</li></ul>
-            <div class="card__links mono"><a href="https://github.com/Printbriandev/sistema-reservas-citas" target="_blank" rel="noopener">código ↗</a></div>
-          </article>
+        <article class="case case--jas" id="caso-jas" aria-labelledby="h-jas">
+          <div class="case__media">
+            <div class="phone">
+              <picture>
+                <source type="image/webp" srcset="img/caso-jas-movil-360.webp 360w, img/caso-jas-movil-720.webp 720w" sizes="240px">
+                <img src="img/caso-jas-movil-360.webp" width="360" height="780" loading="lazy" decoding="async" alt="Menú digital del prototipo de J.A.S Smokehouse &amp; Grill en un teléfono">
+              </picture>
+            </div>
+          </div>
+          <div class="case__body">
+            <p class="case__n">Caso 03</p>
+            <h3 id="h-jas" class="case__title">J.A.S Smokehouse &amp; Grill</h3>
+            <p class="meta"><span class="badge badge--proto">Prototipo</span> oct 2026 · aplicación web · freelance</p>
+            <p>Menú digital por código QR con carrito, envío del pedido por WhatsApp con un código de ticket y panel para que el restaurante vea los pedidos.</p>
+            <dl class="case__dl">
+              <dt>Riesgo → defensa</dt>
+              <dd><ul class="risks"><li>Datos del pedido mal formados → validación del formulario con Zod</li></ul></dd>
+              <dt>Stack</dt>
+              <dd class="stackline">Next.js · TypeScript · React · Tailwind CSS · Zod · Vercel</dd>
+            </dl>
+            <a class="link" href="https://jas-smokehouse-web.vercel.app" target="_blank" rel="noopener">Ver prototipo <span aria-hidden="true">↗</span><span class="sr-only"> de J.A.S Smokehouse &amp; Grill (se abre en otra pestaña)</span></a>
+          </div>
+        </article>
 
-          <article class="card" data-type="academico">
-            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">ago 2026</span></div>
-            <h3>Chatbot del ITLA</h3>
-            <p class="card__kind mono">minería de datos</p>
-            <p>Chatbot en Python con 14 temas y 100 variantes de preguntas. Tolera errores de tipeo, no usa librerías externas y separa los datos de la lógica.</p>
-            <ul class="tags mono"><li>Python</li><li>NLP básico</li></ul>
-            <div class="card__links mono"><a href="https://github.com/Printbriandev/chatbot-itla" target="_blank" rel="noopener">código ↗</a></div>
-          </article>
+        <article class="wip" aria-labelledby="h-inmo">
+          <p class="wip__tag">En curso</p>
+          <div>
+            <h3 id="h-inmo" class="wip__title">Sitio para una inmobiliaria</h3>
+            <p class="meta"><span class="badge badge--dev">En desarrollo</span> sep 2026 · sitio web · freelance · Santo Domingo Este</p>
+            <p>Requerimientos, mapa del sitio, propuesta visual y propuesta económica entregados. La construcción avanza según el contenido de la clienta.</p>
+            <p class="stackline">Requerimientos · UX · HTML/CSS</p>
+          </div>
+        </article>
 
-          <article class="card" data-type="academico">
-            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2026</span></div>
-            <h3>CRUD de Usuarios</h3>
-            <p class="card__kind mono">api rest · git flow</p>
-            <p>API en Node.js y Express con frontend en JavaScript, desarrollada con ramas develop, qa y main.</p>
-            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>Git Flow</li></ul>
-            <div class="card__links mono"><a href="https://github.com/Printbriandev/crud-usuarios-github" target="_blank" rel="noopener">código ↗</a></div>
-          </article>
+        <h3 class="h3 acad__title">Académicos</h3>
+        <ul class="acad">
+          <li class="acad__row">
+            <div class="acad__main"><h4>Sistema de Reservas de Citas</h4><p>API para agendar citas entre clientes y profesionales respetando reglas de disponibilidad. Documentación con Swagger y pruebas con pytest.</p></div>
+            <p class="acad__stack"><span>Python ·</span> <span>FastAPI ·</span> <span>SQLAlchemy ·</span> <span>pytest</span></p>
+            <p class="acad__date"><span>2026 ·</span> <span>API REST ·</span> <span>Programación III</span></p>
+            <a class="link" href="https://github.com/Printbriandev/sistema-reservas-citas" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span><span class="sr-only"> de Sistema de Reservas de Citas (se abre en otra pestaña)</span></a>
+          </li>
+          <li class="acad__row">
+            <div class="acad__main"><h4>Chatbot del ITLA</h4><p>Chatbot en Python con 14 temas y 100 variantes de preguntas. Tolera errores de tipeo, no usa librerías externas y separa los datos de la lógica.</p></div>
+            <p class="acad__stack"><span>Python ·</span> <span>NLP básico</span></p>
+            <p class="acad__date"><span>ago 2026 ·</span> <span>Minería de Datos</span></p>
+            <a class="link" href="https://github.com/Printbriandev/chatbot-itla" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span><span class="sr-only"> del Chatbot del ITLA (se abre en otra pestaña)</span></a>
+          </li>
+          <li class="acad__row">
+            <div class="acad__main"><h4>CRUD de Usuarios</h4><p>API en Node.js y Express con frontend en JavaScript, desarrollada con ramas develop, qa y main.</p></div>
+            <p class="acad__stack"><span>Node.js ·</span> <span>Express ·</span> <span>Git Flow</span></p>
+            <p class="acad__date"><span>2026 ·</span> <span>API REST ·</span> <span>Git Flow</span></p>
+            <a class="link" href="https://github.com/Printbriandev/crud-usuarios-github" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span><span class="sr-only"> de CRUD de Usuarios (se abre en otra pestaña)</span></a>
+          </li>
+          <li class="acad__row">
+            <div class="acad__main"><h4>Inventario de artículos</h4><p>CRUD de inventario con búsqueda y validación de códigos repetidos. Conexión configurada por variables de entorno.</p></div>
+            <p class="acad__stack"><span>Node.js ·</span> <span>Express ·</span> <span>MySQL ·</span> <span>React</span></p>
+            <p class="acad__date"><span>2025 ·</span> <span>Full stack ·</span> primer proyecto con Node.js</p>
+            <a class="link" href="https://github.com/Printbriandev/Project-final-with-nodejs-" target="_blank" rel="noopener">Ver código <span aria-hidden="true">↗</span><span class="sr-only"> de Inventario de artículos (se abre en otra pestaña)</span></a>
+          </li>
+        </ul>
 
-          <article class="card" data-type="academico">
-            <div class="card__top mono"><span class="badge">académico</span><span class="card__date">2025</span></div>
-            <h3>Inventario de artículos</h3>
-            <p class="card__kind mono">full stack · primer proyecto con node.js</p>
-            <p>CRUD de inventario con búsqueda y validación de códigos repetidos. Conexión configurada por variables de entorno.</p>
-            <ul class="tags mono"><li>Node.js</li><li>Express</li><li>MySQL</li><li>React</li></ul>
-            <div class="card__links mono"><a href="https://github.com/Printbriandev/Project-final-with-nodejs-" target="_blank" rel="noopener">código ↗</a></div>
-          </article>
-        </div>
-
-        <p class="note mono">// ¿ves algo que mejorar? acepto sugerencias: <a href="mailto:brianagmdev@gmail.com">brianagmdev@gmail.com</a></p>
+        <p class="suggest">¿Ves algo que mejorar? Acepto sugerencias: <a class="link link--inline" href="mailto:brianagmdev@gmail.com">brianagmdev@gmail.com</a></p>
       </div>
     </section>
 
     <!-- IA -->
-    <section id="ia" class="section reveal">
-      <div class="wrap">
-        <header class="endpoint"><span class="method method--post">POST</span><h2>/construir-con-ia</h2><span class="code">201 Created</span></header>
-        <p class="lead">
-          Trabajo a diario con <strong>Claude</strong> y <strong>Claude Code</strong> como compañeros de desarrollo.
-          La IA me ayuda a aprender y a avanzar más rápido, pero las decisiones y la revisión del código son mías:
-          entiendo cada línea antes de subirla.
-        </p>
-
-        <ol class="pipeline">
-          <li class="step">
-            <span class="step__n mono">01</span>
-            <h3>Planificar</h3>
-            <p>Divido cada trabajo en partes con objetivo y verificación, y no avanzo hasta cerrar la anterior.</p>
-          </li>
-          <li class="step">
-            <span class="step__n mono">02</span>
-            <h3>Construir y depurar</h3>
-            <p>Uso Claude Code en la terminal para escribir, probar y corregir código, como en MTS Tattoo Studio y en este portafolio.</p>
-          </li>
-          <li class="step">
-            <span class="step__n mono">03</span>
-            <h3>Revisar la seguridad</h3>
-            <p>Audito mis repos para sacar credenciales del código y moverlas a variables de entorno, y reemplazo datos personales por datos de ejemplo.</p>
-          </li>
-          <li class="step">
-            <span class="step__n mono">04</span>
-            <h3>Automatizar y documentar</h3>
-            <p>Escribo READMEs claros y automatizo tareas repetitivas con scripts, desde generar documentos hasta desplegar en Vercel.</p>
-          </li>
-        </ol>
+    <section id="ia" class="sec reveal" data-hop="salto 3 · middleware" aria-labelledby="h-ia">
+      <div class="wrap reveal__in">
+        <header class="sec__head">
+          <p class="hop" aria-hidden="true"><i></i>salto 3 · middleware</p>
+          <h2 id="h-ia">Cómo trabajo con IA</h2>
+          <p class="sec__lead">Trabajo a diario con <strong>Claude</strong> y <strong>Claude Code</strong> como compañeros de desarrollo. La IA me ayuda a aprender y a avanzar más rápido, pero las decisiones y la revisión del código son mías: entiendo cada línea antes de subirla.</p>
+        </header>
+        <div class="chain-wrap">
+          <ol class="chain">
+            <li class="chain__step">
+              <span class="chain__node" aria-hidden="true"><b>✓</b></span>
+              <span class="chain__fn" aria-hidden="true">use(planificar)</span>
+              <h3>Planificar</h3>
+              <p>Divido cada trabajo en partes con objetivo y verificación, y no avanzo hasta cerrar la anterior.</p>
+            </li>
+            <li class="chain__step">
+              <span class="chain__node" aria-hidden="true"><b>✓</b></span>
+              <span class="chain__fn" aria-hidden="true">use(construir)</span>
+              <h3>Construir y depurar</h3>
+              <p>Uso Claude Code en la terminal para escribir, probar y corregir código, como en MTS Tattoo Studio y en este portafolio.</p>
+            </li>
+            <li class="chain__step">
+              <span class="chain__node" aria-hidden="true"><b>✓</b></span>
+              <span class="chain__fn" aria-hidden="true">use(revisarSeguridad)</span>
+              <h3>Revisar la seguridad</h3>
+              <p>Audito mis repos para sacar credenciales del código y moverlas a variables de entorno, y reemplazo datos personales por datos de ejemplo.</p>
+            </li>
+            <li class="chain__step">
+              <span class="chain__node" aria-hidden="true"><b>✓</b></span>
+              <span class="chain__fn" aria-hidden="true">use(automatizar)</span>
+              <h3>Automatizar y documentar</h3>
+              <p>Escribo READMEs claros y automatizo tareas repetitivas con scripts, desde generar documentos hasta desplegar en Vercel.</p>
+            </li>
+          </ol>
+          <i class="chain__pkt" aria-hidden="true"></i>
+        </div>
       </div>
     </section>
 
     <!-- STACK -->
-    <section id="stack" class="section reveal">
-      <div class="wrap">
-        <header class="endpoint"><span class="method">GET</span><h2>/stack</h2><span class="code">200 OK</span></header>
-
-        <div class="arch mono" aria-label="Flujo de una petición: cliente, API, lógica y base de datos">
-          <div class="arch__node"><span class="arch__label">cliente</span><span class="arch__tech">HTML · JS · React</span></div>
-          <div class="arch__wire"><i></i><i></i></div>
-          <div class="arch__node arch__node--hot"><span class="arch__label">api rest</span><span class="arch__tech">ASP.NET Core · Express</span></div>
-          <div class="arch__wire"><i></i><i></i></div>
-          <div class="arch__node"><span class="arch__label">lógica</span><span class="arch__tech">C# · Node.js · Python</span></div>
-          <div class="arch__wire"><i></i><i></i></div>
-          <div class="arch__node"><span class="arch__label">base de datos</span><span class="arch__tech">SQL Server · PostgreSQL</span></div>
+    <section id="stack" class="sec sec--racks reveal" data-hop="salto 4 · infraestructura" aria-labelledby="h-stack">
+      <div class="wrap reveal__in">
+        <header class="sec__head">
+          <p class="hop" aria-hidden="true"><i></i>salto 4 · infraestructura</p>
+          <h2 id="h-stack">Stack</h2>
+        </header>
+        <div class="arch" role="img" aria-label="Flujo de una petición: cliente, API, lógica y base de datos">
+          <div class="arch__n"><span>cliente</span><b>HTML · JS · React</b></div>
+          <div class="arch__n arch__n--hot"><span>API REST</span><b>ASP.NET Core · Express</b></div>
+          <div class="arch__n"><span>lógica</span><b>C# · Node.js · Python</b></div>
+          <div class="arch__n"><span>base de datos</span><b>SQL Server · PostgreSQL</b></div>
         </div>
-
-        <div class="rack">
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>lenguajes</h3><span class="u">U1</span></div>
-            <ul class="tags mono"><li>C#</li><li>JavaScript</li><li>TypeScript</li><li>Python</li><li>SQL</li><li>Java</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>backend</h3><span class="u">U2</span></div>
-            <ul class="tags mono"><li>ASP.NET Core</li><li>Entity Framework Core</li><li>Node.js</li><li>Express</li><li>FastAPI</li><li>APIs REST</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>frontend</h3><span class="u">U3</span></div>
-            <ul class="tags mono"><li>HTML</li><li>CSS</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>bases de datos</h3><span class="u">U4</span></div>
-            <ul class="tags mono"><li>SQL Server</li><li>PostgreSQL</li><li>Supabase</li><li>MySQL</li><li>Elasticsearch</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>devops y pruebas</h3><span class="u">U5</span></div>
-            <ul class="tags mono"><li>Git y GitHub</li><li>GitHub Actions</li><li>Docker</li><li>Ansible</li><li>Vercel</li><li>pytest</li><li>Selenium</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>ia e ide</h3><span class="u">U6</span></div>
-            <ul class="tags mono"><li>Claude</li><li>Claude Code</li><li>Cursor</li><li>Antigravity</li><li>Visual Studio</li><li>VS Code</li><li>JetBrains IDEA</li><li>Android Studio</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>fraude y seguridad</h3><span class="u">U7</span></div>
-            <ul class="tags mono"><li>Fraud Detection</li><li>Transaction Monitoring</li><li>CyberSource</li><li>Sentinel</li><li>Visa / Mastercard</li><li>FRED/FTT Unity</li><li>Ciberseguridad</li></ul>
-          </div>
-          <div class="rack__unit">
-            <div class="rack__head mono"><span class="leds"><i></i><i></i><i></i></span><h3>datos e idiomas</h3><span class="u">U8</span></div>
-            <ul class="tags mono"><li>Minería de datos</li><li>Español · nativo</li><li>Inglés · intermedio</li></ul>
-          </div>
-        </div>
+        <ol class="rack">
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U1</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Lenguajes</h3>
+            <p class="unit__sk"><span><strong>C#</strong> ·</span> <span><strong>JavaScript</strong> ·</span> <span>TypeScript ·</span> <span>Python ·</span> <span><strong>SQL</strong> ·</span> <span>Java</span></p>
+            <p class="unit__ev unit__ev--links"><span class="unit__evk">Evidencia:</span> <a href="#caso-autogest">Autogest-Pro</a> <a href="#caso-mts">MTS</a> <a href="#caso-jas">J.A.S</a> <span>Chatbot del ITLA, MIO (Elastic) e ITLA.</span></p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U2</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Backend</h3>
+            <p class="unit__sk"><span><strong>ASP.NET Core</strong> ·</span> <span><strong>Entity Framework Core</strong> ·</span> <span><strong>Node.js</strong> ·</span> <span><strong>Express</strong> ·</span> <span>FastAPI ·</span> <span><strong>APIs REST</strong></span></p>
+            <p class="unit__ev unit__ev--links"><span class="unit__evk">Evidencia:</span> <a href="#caso-autogest">Autogest-Pro</a> <a href="#caso-mts">MTS</a> <span>CRUD de Usuarios y Sistema de Reservas de Citas.</span></p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U3</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Frontend</h3>
+            <p class="unit__sk"><span>HTML ·</span> <span>CSS ·</span> <span>React ·</span> <span>Next.js ·</span> <span>Tailwind CSS</span></p>
+            <p class="unit__ev unit__ev--links"><span class="unit__evk">Evidencia:</span> <a href="#caso-mts">MTS</a> <a href="#caso-jas">J.A.S</a> <a href="#caso-autogest">Autogest-Pro (React)</a></p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U4</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Bases de datos</h3>
+            <p class="unit__sk"><span><strong>SQL Server</strong> ·</span> <span><strong>PostgreSQL</strong> ·</span> <span>Supabase ·</span> <span>MySQL ·</span> <span>Elasticsearch</span></p>
+            <p class="unit__ev unit__ev--links"><span class="unit__evk">Evidencia:</span> <a href="#caso-autogest">Autogest-Pro</a> <a href="#caso-mts">MTS</a> <span>Inventario de artículos y MIO.</span></p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U5</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>DevOps y pruebas</h3>
+            <p class="unit__sk"><span><strong>Git y GitHub</strong> ·</span> <span>GitHub Actions ·</span> <span>Docker ·</span> <span>Ansible ·</span> <span>Vercel ·</span> <span>pytest ·</span> <span>Selenium</span></p>
+            <p class="unit__ev unit__ev--links"><span class="unit__evk">Evidencia:</span> <a href="#caso-mts">MTS</a> <span>Sistema de Reservas de Citas (pytest), repos de DevOps y una tarea con Selenium.</span></p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U6</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>IA e IDE</h3>
+            <p class="unit__sk"><span>Claude ·</span> <span>Claude Code ·</span> <span>Cursor ·</span> <span>Antigravity ·</span> <span>Visual Studio ·</span> <span>VS Code ·</span> <span>JetBrains IDEA ·</span> <span>Android Studio</span></p>
+            <p class="unit__ev">Evidencia: flujo de trabajo diario, este portafolio, ITLA y proyectos.</p>
+          </li>
+          <li class="unit unit--af">
+            <span class="unit__u" aria-hidden="true">U7</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Fraude y seguridad</h3>
+            <p class="unit__sk"><span lang="en">Fraud Detection ·</span> <span lang="en">Transaction Monitoring ·</span> <span lang="en">Bank Fraud Prevention ·</span> <span lang="en">Fraud Claims ·</span> <span>CyberSource ·</span> <span>Sentinel ·</span> <span>Visa / Mastercard</span> <span>(análisis) ·</span> <span>FRED/FTT Unity ·</span> <span>Ciberseguridad</span></p>
+            <p class="unit__ev">Evidencia: MIO, <span lang="en">Foundations of Cybersecurity</span> (Google) y CCSC (Hack &amp; Fix).</p>
+          </li>
+          <li class="unit">
+            <span class="unit__u" aria-hidden="true">U8</span><i class="unit__led" aria-hidden="true"></i>
+            <h3>Datos e idiomas</h3>
+            <p class="unit__sk"><span>Minería de datos ·</span> <span>Español nativo ·</span> <span>Inglés intermedio</span></p>
+            <p class="unit__ev">Evidencia: ITLA, Chatbot del ITLA, <span lang="en">English for IT 2</span> (Cisco / ITLA).</p>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- EXPERIENCIA -->
-    <section id="experiencia" class="section reveal">
-      <div class="wrap">
-        <header class="endpoint"><span class="method">GET</span><h2>/experiencia</h2><span class="code">200 OK</span></header>
-        <ol class="logs mono">
-          <li>
-            <span class="logs__ts">[2025-10 → hoy]</span><span class="logs__lvl">INFO</span>
-            <div><strong>Fraud Analyst Jr. · MIO</strong><p>Fintech dominicana de pagos. Monitoreo de transacciones, investigación de casos sospechosos y consultas SQL en Elastic. Herramientas: análisis de Visa y Mastercard, CyberSource, Sentinel, FRED/FTT Unity y Elastic.</p></div>
+    <section id="experiencia" class="sec reveal" data-hop="salto 5 · capa antifraude" aria-labelledby="h-exp">
+      <div class="wrap reveal__in">
+        <header class="sec__head">
+          <p class="hop" aria-hidden="true"><i></i>salto 5 · capa antifraude</p>
+          <h2 id="h-exp">Experiencia</h2>
+        </header>
+        <div class="exp">
+        <ol class="log">
+          <li class="log__e log__e--scan">
+            <p class="log__t">2025-10 → hoy</p>
+            <div class="log__b">
+              <h3><span lang="en">Fraud Analyst Jr.</span> · MIO</h3>
+              <p>Fintech dominicana de pagos. Monitoreo de transacciones, investigación de casos sospechosos y consultas SQL en Elastic. Herramientas: análisis de Visa y Mastercard, CyberSource, Sentinel, FRED/FTT Unity y Elastic.</p>
+            </div>
+            <i class="log__scan" aria-hidden="true"></i>
           </li>
-          <li>
-            <span class="logs__ts">[2026-06 → hoy]</span><span class="logs__lvl">INFO</span>
-            <div><strong>Desarrollador web freelance</strong><p>Sitios y APIs para negocios de Santo Domingo: MTS Tattoo Studio, J.A.S Smokehouse y una inmobiliaria.</p></div>
+          <li class="log__e">
+            <p class="log__t">2026-06 → hoy</p>
+            <div class="log__b">
+              <h3>Desarrollador web freelance</h3>
+              <p>Sitios y APIs para negocios de Santo Domingo: MTS Tattoo Studio, J.A.S Smokehouse y una inmobiliaria.</p>
+            </div>
           </li>
-          <li>
-            <span class="logs__ts">[2024-05 → hoy]</span><span class="logs__lvl logs__lvl--edu">EDU</span>
-            <div><strong>Tecnólogo en Desarrollo de Software · ITLA</strong><p>Instituto Tecnológico de las Américas.</p></div>
+          <li class="log__e">
+            <p class="log__t">2024-05 → en curso</p>
+            <div class="log__b">
+              <h3>Estudiante · Tecnólogo en Desarrollo de Software · ITLA</h3>
+              <p>Instituto Tecnológico de las Américas. Carrera en curso desde mayo de 2024.</p>
+            </div>
           </li>
         </ol>
+        <!-- registro de la visita: lo llena script.js con la hora real de tu navegador (decorativo, no se envía nada) -->
+        <aside class="visit" aria-hidden="true" hidden>
+          <p class="visit__hd"><i></i><span><span class="visit__layer">capa antifraude · </span>registro de tu visita</span><em>en vivo</em></p>
+          <ol class="visit__log"></ol>
+          <p class="visit__ft">Lo genera tu navegador con su hora local. No se guarda ni se envía nada.</p>
+        </aside>
+        </div>
 
-        <h3 class="sub mono">// certificaciones</h3>
-        <ul class="certs">
-          <li><strong>English for IT 2</strong><span class="mono">Cisco / ITLA · ago 2026</span></li>
-          <li><strong>Enterprise Full Stack with Spring Boot 4 and Angular 21</strong><span class="mono">Dev Senior Code · mar 2026</span></li>
-          <li><strong>Apps de IA generativa</strong><span class="mono">Google Cloud / Coursera · ene 2026</span></li>
-          <li><strong>CCSC</strong><span class="mono">Hack &amp; Fix · ene 2026</span></li>
-          <li><strong>Curso de Iniciación al Desarrollo con IA</strong><span class="mono">BIG School · oct 2025</span></li>
-          <li><strong>Foundations of Cybersecurity</strong><span class="mono">Google / Coursera · may 2025</span></li>
-          <li><strong>Fundamentos Técnicos del Computador</strong><span class="mono">ITLA · abr 2024</span></li>
-        </ul>
-        <p class="note mono">// próximas: Foundational C# with Microsoft · HackerRank SQL · GitHub Foundations</p>
+        <h3 class="h3">Certificaciones</h3>
+        <ol class="certs">
+          <li><strong lang="en">English for IT 2</strong><span>Cisco / ITLA · ago 2026</span></li>
+          <li><strong lang="en">Enterprise Full Stack with Spring Boot 4 and Angular 21</strong><span>Dev Senior Code · mar 2026</span></li>
+          <li><strong>Apps de IA generativa</strong><span>Google Cloud / Coursera · ene 2026</span></li>
+          <li><strong>CCSC</strong><span>Hack &amp; Fix · ene 2026</span></li>
+          <li><strong>Curso de Iniciación al Desarrollo con IA</strong><span>BIG School · oct 2025 (participación)</span></li>
+          <li><strong lang="en">Foundations of Cybersecurity</strong><span>Google / Coursera · may 2025</span></li>
+          <li><strong>Fundamentos Técnicos del Computador</strong><span>ITLA · abr 2024</span></li>
+        </ol>
+        <p class="next">Próximas: <span lang="en">Foundational C# with Microsoft</span> · <span>HackerRank SQL</span> · <span lang="en">GitHub Foundations</span></p>
       </div>
     </section>
 
-
-    <div class="switch" aria-hidden="true">
-      <div class="wrap switch__inner">
-        <span class="switch__ear"></span>
-        <div class="switch__label mono"><b>BG-SW24-EDGE</b><span>24× RJ45 · 1 Gbps</span></div>
-        <div class="switch__ports" data-ports="24"></div>
-        <div class="switch__uplink mono"><span class="sfp"></span><span class="sfp"></span><em>SFP+</em></div>
-        <span class="switch__ear"></span>
-      </div>
-    </div>
-
     <!-- CONTACTO -->
-    <section id="contacto" class="section section--contact reveal">
-      <div class="wrap contact">
-        <header class="endpoint endpoint--center"><span class="method method--post">POST</span><h2>/contacto</h2></header>
-        <p class="contact__lead">¿Tienes una pasantía, un puesto junior o un proyecto? Escríbeme.</p>
-        <div class="contact__grid mono">
-          <a class="contact__item" href="mailto:brianagmdev@gmail.com"><span class="contact__k">email · principal</span><span class="contact__v">brianagmdev@gmail.com</span></a>
-          <a class="contact__item" href="mailto:guzmanmanonbrian@gmail.com"><span class="contact__k">email</span><span class="contact__v">guzmanmanonbrian@gmail.com</span></a>
-          <a class="contact__item" href="tel:+18298629305"><span class="contact__k">teléfono</span><span class="contact__v">829-862-9305</span></a>
-          <a class="contact__item contact__item--wa" href="https://wa.me/18298629305?text=Hola%20Brian%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener"><span class="contact__k">whatsapp</span><span class="contact__v">Escríbeme por WhatsApp ↗</span></a>
+    <section id="contacto" class="sec sec--contact reveal" data-hop="respuesta · 200 OK" aria-labelledby="h-contacto">
+      <div class="wrap reveal__in contact">
+        <header class="sec__head contact__head">
+          <p class="hop" aria-hidden="true"><i></i>respuesta · 200 OK</p>
+          <h2 id="h-contacto">Contacto</h2>
+          <p class="serif contact__lead">¿Tienes una pasantía, un puesto junior o un proyecto? Escríbeme.</p>
+        </header>
+        <div class="contact__body">
+          <ul class="ports">
+            <li><a class="port" href="mailto:brianagmdev@gmail.com"><i class="port__led" aria-hidden="true"></i><span class="port__k">Correo · principal</span><span class="port__v">brianagmdev@gmail.com</span></a></li>
+            <li><a class="port" href="mailto:guzmanmanonbrian@gmail.com"><i class="port__led" aria-hidden="true"></i><span class="port__k">Correo</span><span class="port__v">guzmanmanonbrian@gmail.com</span></a></li>
+            <li><a class="port" href="tel:+18298629305"><i class="port__led" aria-hidden="true"></i><span class="port__k">Teléfono</span><span class="port__v">829-862-9305</span></a></li>
+            <li><a class="port" href="https://wa.me/18298629305?text=Hola%20Brian%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener"><i class="port__led" aria-hidden="true"></i><span class="port__k">WhatsApp</span><span class="port__v">Escríbeme por WhatsApp <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></span></a></li>
+            <li><a class="port" href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener"><i class="port__led" aria-hidden="true"></i><span class="port__k">LinkedIn</span><span class="port__v">brian-guzman-manon <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></span></a></li>
+            <li><a class="port" href="https://github.com/Printbriandev" target="_blank" rel="noopener"><i class="port__led" aria-hidden="true"></i><span class="port__k">GitHub</span><span class="port__v">Printbriandev <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></span></a></li>
+            <li><a class="port" href="https://www.instagram.com/gmn.brian" target="_blank" rel="noopener"><i class="port__led" aria-hidden="true"></i><span class="port__k">Instagram</span><span class="port__v">gmn.brian <span aria-hidden="true">↗</span><span class="sr-only"> (se abre en otra pestaña)</span></span></a></li>
+            <li><a class="port" href="CV-Brian-Guzman-Manon.pdf" download><i class="port__led" aria-hidden="true"></i><span class="port__k">CV</span><span class="port__v">Descargar CV (PDF) <span aria-hidden="true">↓</span></span></a></li>
+          </ul>
+          <p class="loc"><svg aria-hidden="true"><use href="#i-pin"/></svg>Santo Domingo Este, República Dominicana</p>
         </div>
-        <p class="contact__loc mono">📍 Santo Domingo Este, República Dominicana</p>
-        <ul class="contact__links mono">
-          <li><a href="https://www.linkedin.com/in/brian-guzman-manon" target="_blank" rel="noopener">linkedin</a></li>
-          <li><a href="https://github.com/Printbriandev" target="_blank" rel="noopener">github</a></li>
-          <li><a href="https://www.instagram.com/gmn.brian" target="_blank" rel="noopener">instagram</a></li>
-          <li><a href="CV-Brian-Guzman-Manon.pdf" target="_blank" rel="noopener">cv.pdf</a></li>
-        </ul>
+        <figure class="grad">
+          <picture>
+            <source type="image/webp" srcset="img/brian-graduacion-400.webp 400w, img/brian-graduacion-800.webp 800w" sizes="(min-width: 900px) 300px, 240px">
+            <img src="img/brian-graduacion.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Brian Guzmán Mañón en su foto de graduación">
+          </picture>
+          <figcaption>Listo para el siguiente nivel</figcaption>
+        </figure>
       </div>
     </section>
   </main>
 
-  <footer class="footer mono">
-    <div class="wrap footer__inner">
-      <p><i class="led"></i> servidor en línea · © <span id="year">2026</span> Brian Guzmán Mañón</p>
-      <a href="#top">volver arriba ↑</a>
+  <footer class="ftr">
+    <div class="wrap ftr__in">
+      <p>© <span id="year">2026</span> Brian Guzmán Mañón</p>
+      <a class="ftr__top" href="#top">Volver arriba <span aria-hidden="true">↑</span></a>
+      <p class="ftr__ai">La escena del inicio y el retrato se crearon con IA (Higgsfield). El código de las pantallas es de ejemplo, con datos ficticios.</p>
     </div>
   </footer>
-
-  <script src="script.js" defer></script>
 </body>
 </html>
