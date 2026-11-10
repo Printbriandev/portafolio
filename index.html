@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('escena-pausada')==='1')document.documentElement.classList.add('anim-off')}catch(e){}</script>
+  <script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('bg-boot')!=='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-booting')}catch(e){}try{if(localStorage.getItem('escena-pausada')==='1')document.documentElement.classList.add('anim-off')}catch(e){}</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Brian Guzmán Mañón · Junior Backend Developer</title>
@@ -41,24 +41,34 @@
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.4"/></g></symbol>
   </svg>
 
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__door boot__door--l"><span class="boot__handle"></span></div>
+    <div class="boot__door boot__door--r"><span class="boot__handle"></span></div>
+    <div class="boot__panel">
+      <p class="boot__title"><i class="boot__led"></i> BG-DC01 · iniciando servidor</p>
+      <ul class="boot__log"></ul>
+      <button class="boot__skip" type="button">entrar →</button>
+    </div>
+  </div>
+
   <div class="sentinel" aria-hidden="true"></div>
 
   <header class="hdr">
     <div class="hdr__in">
       <a class="brand" href="#top" aria-label="Brian Guzmán, inicio">
         <span class="brand__mark" aria-hidden="true">BG</span>
-        <span class="brand__name">Brian Guzmán</span>
+        <span class="brand__name">brian<span class="accent">@</span>backend<span class="blink">_</span></span>
       </a>
       <button class="hdr__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
         <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
       <nav id="menu" class="menu" aria-label="Secciones">
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#ia">IA</a>
-        <a href="#stack">Stack</a>
-        <a href="#experiencia">Experiencia</a>
-        <a href="#contacto" class="menu__cta">Contacto</a>
+        <a href="#sobre-mi">/sobre-mi</a>
+        <a href="#proyectos">/proyectos</a>
+        <a href="#ia">/ia</a>
+        <a href="#stack">/stack</a>
+        <a href="#experiencia">/experiencia</a>
+        <a href="#contacto" class="menu__cta">/contacto</a>
       </nav>
     </div>
     <div class="progress" aria-hidden="true"><i></i></div>
@@ -128,6 +138,7 @@
       <div class="wrap reveal__in about">
         <header class="sec__head about__head">
           <p class="hop" aria-hidden="true"><i></i>salto 1 · cliente</p>
+          <p class="endpoint" aria-hidden="true"><span class="method">GET</span><span class="endpoint__path">/sobre-mi</span><span class="endpoint__code">200 OK</span></p>
           <h2 id="h-sobre">Sobre mí</h2>
         </header>
         <figure class="portrait">
@@ -189,6 +200,7 @@
       <div class="wrap reveal__in">
         <header class="sec__head">
           <p class="hop" aria-hidden="true"><i></i>salto 2 · api</p>
+          <p class="endpoint" aria-hidden="true"><span class="method">GET</span><span class="endpoint__path">/proyectos</span><span class="endpoint__code">200 OK</span></p>
           <h2 id="h-proy">Proyectos</h2>
           <p class="sec__lead">Tres casos con su contexto técnico (dos freelance y uno académico) y, debajo, el resto de proyectos académicos.</p>
         </header>
@@ -328,6 +340,7 @@
       <div class="wrap reveal__in">
         <header class="sec__head">
           <p class="hop" aria-hidden="true"><i></i>salto 3 · middleware</p>
+          <p class="endpoint" aria-hidden="true"><span class="method">GET</span><span class="endpoint__path">/ia</span><span class="endpoint__code">200 OK</span></p>
           <h2 id="h-ia">Cómo trabajo con IA</h2>
           <p class="sec__lead">Trabajo a diario con <strong>Claude</strong> y <strong>Claude Code</strong> como compañeros de desarrollo. La IA me ayuda a aprender y a avanzar más rápido, pero las decisiones y la revisión del código son mías: entiendo cada línea antes de subirla.</p>
         </header>
@@ -368,6 +381,7 @@
       <div class="wrap reveal__in">
         <header class="sec__head">
           <p class="hop" aria-hidden="true"><i></i>salto 4 · infraestructura</p>
+          <p class="endpoint" aria-hidden="true"><span class="method">GET</span><span class="endpoint__path">/stack</span><span class="endpoint__code">200 OK</span></p>
           <h2 id="h-stack">Stack</h2>
         </header>
         <div class="arch" role="img" aria-label="Flujo de una petición: cliente, API, lógica y base de datos">
@@ -434,6 +448,7 @@
       <div class="wrap reveal__in">
         <header class="sec__head">
           <p class="hop" aria-hidden="true"><i></i>salto 5 · capa antifraude</p>
+          <p class="endpoint" aria-hidden="true"><span class="method">GET</span><span class="endpoint__path">/experiencia</span><span class="endpoint__code">200 OK</span></p>
           <h2 id="h-exp">Experiencia</h2>
         </header>
         <div class="exp">
@@ -479,7 +494,7 @@
           <li><strong lang="en">Foundations of Cybersecurity</strong><span>Google / Coursera · may 2025</span></li>
           <li><strong>Fundamentos Técnicos del Computador</strong><span>ITLA · abr 2024</span></li>
         </ol>
-        <p class="next">Próximas: <span lang="en">Foundational C# with Microsoft</span> · <span>HackerRank SQL</span> · <span lang="en">GitHub Foundations</span></p>
+        <p class="next">Próximas: <span lang="en">Foundational C# with Microsoft</span> · <span>HackerRank SQL</span> · <span lang="en">GitHub Foundations</span> · <a href="https://aprenderust.dev/" rel="noopener" target="_blank">Aprende Rust (midudev)</a></p>
       </div>
     </section>
 
@@ -488,6 +503,7 @@
       <div class="wrap reveal__in contact">
         <header class="sec__head contact__head">
           <p class="hop" aria-hidden="true"><i></i>respuesta · 200 OK</p>
+          <p class="endpoint" aria-hidden="true"><span class="method method--post">POST</span><span class="endpoint__path">/contacto</span><span class="endpoint__code">201 Created</span></p>
           <h2 id="h-contacto">Contacto</h2>
           <p class="serif contact__lead">¿Tienes una pasantía, un puesto junior o un proyecto? Escríbeme.</p>
         </header>

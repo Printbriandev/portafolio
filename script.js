@@ -241,3 +241,42 @@
   /* ---------- año del footer ---------- */
   mod('year', () => { const y = document.getElementById('year'); if (y) y.textContent = String(new Date().getFullYear()); });
 })();
+
+/* ---------- Arranque del servidor y puertas del rack (una vez por sesión) ---------- */
+(function boot() {
+  const el = document.getElementById('boot');
+  const root = document.documentElement;
+  if (!el) return;
+  if (!root.classList.contains('is-booting')) { el.remove(); return; }
+  try { sessionStorage.setItem('bg-boot', '1'); } catch (e) {}
+  const log = el.querySelector('.boot__log');
+  const lines = [
+    ['ok', 'Encendiendo rack A-01'],
+    ['ok', 'Switch BG-SW24: 24 puertos RJ45 · 1 Gbps'],
+    ['ok', 'Enlace eth0 activo · full-duplex'],
+    ['ok', 'Montando bases de datos: SQL Server · PostgreSQL'],
+    ['ok', 'API REST escuchando en :443'],
+    ['go', 'Bienvenido al data center de Brian'],
+  ];
+  let i = 0, done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    el.classList.add('is-open');
+    root.classList.remove('is-booting');
+    setTimeout(() => el.remove(), 1100);
+  };
+  const next = () => {
+    if (done) return;
+    if (i >= lines.length) { setTimeout(finish, 380); return; }
+    const [k, text] = lines[i++];
+    const li = document.createElement('li');
+    li.innerHTML = k === 'go' ? '<span class="go">&gt;</span> ' + text : '<span class="ok">[ OK ]</span> ' + text;
+    log.appendChild(li);
+    setTimeout(next, k === 'go' ? 420 : 230);
+  };
+  el.querySelector('.boot__skip').addEventListener('click', finish);
+  document.addEventListener('keydown', finish, { once: true });
+  el.querySelector('.boot__skip').focus({ preventScroll: true });
+  setTimeout(next, 250);
+  setTimeout(finish, 4500); // nunca bloquea más de 4.5 s
+})();

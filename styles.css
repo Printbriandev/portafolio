@@ -930,3 +930,56 @@ html:not(.js) .sec--racks::after, .sec--racks.is-in::after { background-image: u
   .flow__n::after, .arch__n::after, .chain__pkt, .log__scan { display: none; }
   .glow { opacity: .5; }
 }
+
+/* ---------- Esencia de la versión anterior: arranque de servidor, marca y rutas ---------- */
+.accent { color: var(--accent); }
+.blink { color: var(--accent); animation: bgblink 1s steps(1) infinite; }
+@keyframes bgblink { 50% { opacity: 0; } }
+html.anim-off .blink { animation: none; }
+.brand__name { font: 600 15px/1 var(--mono); letter-spacing: -.01em; }
+.menu a { font-family: var(--mono); font-size: 13.5px; }
+.js .menu a { font-family: var(--mono); }
+@media (max-width: 899px) { .js .menu a { font: 600 20px/1.2 var(--mono); } }
+.endpoint { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 14px; font: 500 12.5px/1 var(--mono); color: var(--muted); }
+.endpoint .method { padding: 4px 7px; border-radius: 4px; background: rgba(52, 224, 161, .14); border: 1px solid rgba(52, 224, 161, .45); color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+.endpoint .method--post { background: rgba(167, 139, 250, .14); border-color: rgba(167, 139, 250, .5); color: var(--accent-3); }
+.endpoint__path { color: var(--text); }
+.endpoint__code { margin-left: auto; color: var(--accent); }
+.endpoint__code::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(52, 224, 161, .7); vertical-align: 1px; }
+.sec__head .endpoint { max-width: 420px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+
+/* arranque: puertas de rack que se abren (una vez por sesión; no con movimiento reducido ni sin JS) */
+.boot { display: none; }
+html.is-booting, html.is-booting body { overflow: hidden; }
+html.is-booting .boot { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; animation: bootfail 0s 6s forwards; }
+@keyframes bootfail { to { visibility: hidden; pointer-events: none; } }
+.boot__door {
+  position: absolute; top: 0; bottom: 0; width: 50.5%;
+  background: radial-gradient(circle, #1b2540 1.3px, transparent 1.6px) 0 0 / 9px 9px, linear-gradient(180deg, #0d1426, #080c18);
+  border: 1px solid #2a3858; transition: transform 1s cubic-bezier(.7, 0, .2, 1);
+}
+.boot__door--l { left: 0; border-right: 2px solid var(--accent); box-shadow: inset -30px 0 60px rgba(0, 0, 0, .6); }
+.boot__door--r { right: 0; border-left: 2px solid var(--accent-3); box-shadow: inset 30px 0 60px rgba(0, 0, 0, .6); }
+.boot__handle { position: absolute; top: 50%; width: 10px; height: 120px; margin-top: -60px; background: linear-gradient(#3a4b72, #1c2640); border: 1px solid #44567f; }
+.boot__door--l .boot__handle { right: 26px; }
+.boot__door--r .boot__handle { left: 26px; }
+.boot__panel {
+  position: relative; z-index: 2; width: min(520px, calc(100% - 32px)); padding: 20px 22px; font-family: var(--mono);
+  background: rgba(5, 8, 14, .94); border: 1px solid var(--line-strong); border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(52, 224, 161, .15), 0 30px 80px rgba(0, 0, 0, .6);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.boot__title { margin: 0 0 12px; color: var(--text); font-size: 13px; }
+.boot__led { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.boot__log { list-style: none; margin: 0; padding: 0; min-height: 150px; font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.boot__log li { animation: bootline .25s ease both; }
+.boot__log .ok { color: var(--accent); }
+.boot__log .go { color: var(--accent-3); }
+@keyframes bootline { from { opacity: 0; transform: translateX(-6px); } }
+.boot__skip { min-height: 44px; margin-top: 10px; padding: 0 16px; background: none; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); font: 500 12.5px/1 var(--mono); cursor: pointer; }
+.boot__skip:hover, .boot__skip:focus-visible { color: var(--accent); border-color: var(--accent); }
+.boot.is-open .boot__door--l { transform: translateX(-102%); }
+.boot.is-open .boot__door--r { transform: translateX(102%); }
+.boot.is-open .boot__panel { opacity: 0; transform: scale(.96); }
+.boot.is-open { pointer-events: none; }
+@media print { .boot { display: none !important; } }
