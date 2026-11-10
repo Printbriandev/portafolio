@@ -983,3 +983,7 @@ html.is-booting .boot { position: fixed; inset: 0; z-index: 200; display: grid; 
 .boot.is-open .boot__panel { opacity: 0; transform: scale(.96); }
 .boot.is-open { pointer-events: none; }
 @media print { .boot { display: none !important; } }
+
+/* pasillo 3D de fondo (esencia anterior): fijo detrás de las secciones; la foto del inicio lo cubre */
+.pasillo { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: .4; -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.35), #000 22%, #000 78%, rgba(0,0,0,.35)); mask-image: linear-gradient(90deg, rgba(0,0,0,.35), #000 22%, #000 78%, rgba(0,0,0,.35)); }
+@media print { .pasillo { display: none !important; } }
