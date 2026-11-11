@@ -690,6 +690,7 @@ html:not(.js) .p.on::before, html:not(.js) .flow__n::after, html:not(.js) .arch_
 @media (min-width: 900px) { .wip { grid-template-columns: 140px minmax(0, 1fr); gap: 24px; } }
 
 .acad__title { margin-top: 64px; }
+.acad__note { margin: 0 0 18px; }
 .acad { border-top: 1px solid var(--line); }
 .acad__row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); }
 .acad h4 { margin-bottom: 6px; font: 600 18px/1.3 var(--sans); }
